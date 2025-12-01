@@ -4,7 +4,7 @@ export const projects = [
     liveLink: 'https://talentmanagement.africaexchange.com',
     info: 'Open on a large screen device, app is not responsive',
     codeLink: '',
-    name: 'AFEX Talent Management Portal',
+    name: 'Talent Management Portal',
     technologies: [
       'React',
       'Next.js',
@@ -15,20 +15,8 @@ export const projects = [
       'Recharts',
       'Chart.js',
     ],
-    description: (
-      <span>
-        The AFEX Talent Management Portal is an HR platform with three user
-        groups: <br />
-        &nbsp;-Admins (HR Team) handle onboarding, offboarding, appraisals,
-        leave policies, promotions, announcements, surveys, and profile edit
-        approvals. <br />
-        &nbsp;-Supervisors/Team Leads approve team member leaves and appraisals.
-        <br />
-        &nbsp;-Staff apply for leave, complete appraisals, view team leaves and
-        anniversaries, and edit profiles. This platform streamlines HR
-        operations, enabling seamless management across all levels.
-      </span>
-    ),
+    description:
+      'An HR platform for managing talent across three user groups. Admins handle onboarding, appraisals, and leave policies. Supervisors approve team leaves. Staff manage leaves and profiles. Streamlines HR operations across all organizational levels.',
   },
   {
     image: '/bms.jpeg',
@@ -47,7 +35,7 @@ export const projects = [
       'Chart.js',
     ],
     description:
-      'BMS (Budget Management System) is a finance tool tailored for organizational budget and expense management, BMS incorporates essential features such as organization structure management, staff onboarding, request creation, approval workflows, denial or escalation processes, approval limits, and real-time communication among request participants. The web app streamlines financial processes, offering an intuitive platform for effective budget management and expense tracking within organizations.',
+      'A finance tool for organizational budget and expense management. Features include request creation, approval workflows, approval limits, staff onboarding, and real-time communication. Streamlines financial processes and expense tracking within organizations.',
   },
 
   {
@@ -65,7 +53,7 @@ export const projects = [
       'Chart.js',
     ],
     description:
-      'This user-friendly platform allows end users to log internal organization or system issues efficiently. With intuitive features, it facilitates seamless communication by directing tickets to the appropriate department or individual for prompt resolution. The web app enhances organization-wide issue tracking, streamlining the process of reporting and addressing internal concerns.',
+      'A user-friendly platform for end users to log internal organization or system issues. Features include ticket creation, assignment, and resolution tracking. Enhances organization-wide issue management and communication.',
   },
   {
     image: '/ticketingv2.png',
@@ -142,7 +130,8 @@ export const hobbyProjects = [
     technologies: ['React', 'Next.js', 'Tailwind CSS', 'Mantine UI'],
     liveLink: 'https://quadmor2.vercel.app/',
     codeLink: '',
-    description: 'Version 2 of Quadmor Portfolio website.',
+    description:
+      "An evolved version of Quadmor's portfolio website with an improved design. Features enhanced visual aesthetics, better user experience, and refined design elements that showcase the designer's creative growth.",
   },
   {
     image: '/quadmor3.png',
@@ -150,6 +139,7 @@ export const hobbyProjects = [
     technologies: ['React', 'Next.js', 'Tailwind CSS'],
     liveLink: 'https://www.quadmor.design/',
     codeLink: '',
-    description: 'Version 3 of Quadmor Portfolio website.',
+    description:
+      'A complete redesign that deviates from the non-interactive v2 into a more aesthetically pleasing and interactive experience. Features engaging animations, interactive elements, and a modern design that enhances user engagement.',
   },
 ];
