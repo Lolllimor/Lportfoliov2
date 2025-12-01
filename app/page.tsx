@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { HiOutlineExternalLink } from 'react-icons/hi';
 import { MdInfoOutline } from 'react-icons/md';
 import { FiGithub } from 'react-icons/fi';
@@ -18,6 +19,20 @@ import { techStack } from './constants/tech-stack';
 import { navItems } from './constants/navlist';
 
 export default function Home() {
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const checkDevice = () => {
+      setIsMobileOrTablet(window.innerWidth < 1024);
+    };
+
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
   return (
     <main
       className="min-h-screen relative"
@@ -375,16 +390,43 @@ export default function Home() {
                     idx % 2 === 1 ? 'md:flex-row-reverse' : ''
                   } flex-col md:flex-row`}
                 >
-                  
                   <div className="flex-1 w-full md:w-auto group">
                     <div className="relative overflow-hidden rounded-lg">
                       <a
-                        href={project.liveLink || project.codeLink || '#'}
+                        href={
+                          isMobileOrTablet && (project as any).info
+                            ? undefined
+                            : project.liveLink || project.codeLink || '#'
+                        }
                         target={project.liveLink ? '_blank' : undefined}
                         rel={
                           project.liveLink ? 'noopener noreferrer' : undefined
                         }
                         className="block"
+                        onClick={(e) => {
+                          if (isMobileOrTablet && (project as any).info) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                          }
+                        }}
+                        onTouchStart={(e) => {
+                          if (isMobileOrTablet && (project as any).info) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            return false;
+                          }
+                        }}
+                        style={{
+                          pointerEvents:
+                            isMobileOrTablet && (project as any).info
+                              ? 'none'
+                              : 'auto',
+                          cursor:
+                            isMobileOrTablet && (project as any).info
+                              ? 'default'
+                              : 'pointer',
+                        }}
                       >
                         <Image
                           src={project.image}
@@ -398,7 +440,6 @@ export default function Home() {
                     </div>
                   </div>
 
-               
                   <div className="flex-1 space-y-6">
                     <div>
                       <span
@@ -546,7 +587,6 @@ export default function Home() {
                     idx % 2 === 1 ? 'md:flex-row-reverse' : ''
                   } flex-col md:flex-row`}
                 >
-                  
                   <div className="flex-1 w-full md:w-auto group">
                     <div className="relative overflow-hidden rounded-lg">
                       <a
@@ -556,6 +596,11 @@ export default function Home() {
                           project.liveLink ? 'noopener noreferrer' : undefined
                         }
                         className="block"
+                        onClick={(e) => {
+                          if (isMobileOrTablet && (project as any).info) {
+                            e.preventDefault();
+                          }
+                        }}
                       >
                         <Image
                           src={project.image}
@@ -569,7 +614,6 @@ export default function Home() {
                     </div>
                   </div>
 
-               
                   <div className="flex-1 space-y-6">
                     <div>
                       <span
