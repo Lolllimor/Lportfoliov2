@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Burger, Drawer } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import React from "react";
-import { navItems } from "../constants/navlist";
+import { Burger, Drawer } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import React from 'react';
+import { navItems } from '../constants/navlist';
 
 function MobileSidebar() {
   const [opened, { open, close, toggle }] = useDisclosure(false);
@@ -25,9 +25,29 @@ function MobileSidebar() {
           {navItems.map((item, idx) => (
             <li
               key={idx}
-              className="text-tunes-heading flex hover:bg-[#f5f5f6] text-[17px] font-semibold transition-all duration-[.23s]"
+              className="flex text-[17px] font-mono transition-all duration-[.3s] rounded-lg p-2"
+              style={{ color: 'var(--text-secondary)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-card)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
-              <a href={item.link} className="w-full" onClick={close}>{item.name}</a>
+              <a
+                href={item.link}
+                className="w-full flex items-center gap-2"
+                onClick={close}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--accent-secondary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--text-secondary)';
+                }}
+              >
+                <span className="gradient-text">0{idx + 1}.</span>
+                {item.name}
+              </a>
             </li>
           ))}
         </ul>

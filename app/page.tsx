@@ -1,259 +1,788 @@
-import Image from 'next/image';
-import { CiLinkedin } from 'react-icons/ci';
-import { FiGithub } from 'react-icons/fi';
-import AboutBg from '@/public/about-img.webp';
-import AboutIllustrator from '@/public/about-illustrator.svg';
-import { Mulish } from 'next/font/google';
-import Technology from './components/technology';
-import ProjectLink from './components/project-link';
-import { TbMapSearch } from 'react-icons/tb';
-import { MdInfoOutline, MdOutlineEmail } from 'react-icons/md';
-import { projects } from './constants/project-list';
-import { techStack } from './constants/tech-stack';
-import { socialLinks } from './constants/social-links';
-import { navItems } from './constants/navlist';
-import MobileSidebar from './components/mobile-sidebar';
-import { Tooltip } from '@mantine/core';
-import Logo from './components/logo';
+'use client';
 
-const mulish = Mulish({ subsets: ['latin'] });
+import { HiOutlineExternalLink } from 'react-icons/hi';
+import { MdInfoOutline } from 'react-icons/md';
+import { FiGithub } from 'react-icons/fi';
+import { Tooltip } from '@mantine/core';
+import Image from 'next/image';
+import ParticleBackground from './components/particle-background';
+import ScrollAnimation from './components/scroll-animation';
+import InteractiveLink from './components/interactive-link';
+import InteractiveDiv from './components/interactive-div';
+import MobileSidebar from './components/mobile-sidebar';
+import { socialLinks } from './constants/social-links';
+import SmoothScroll from './components/smooth-scroll';
+import { hobbyProjects, projects } from './constants/project-list';
+import ThemeToggle from './components/theme-toggle';
+import { techStack } from './constants/tech-stack';
+import { navItems } from './constants/navlist';
 
 export default function Home() {
   return (
-    <main className="bg-white">
-      <nav className="flex fixed z-10 w-full top-0 items-center shadow-sm px-10 py-[25px] bg-white text-primary justify-between">
-        <h3 className="font-bold text-[20px] text-tunes-heading cursor-pointer">
-          <a href="#home">
-            {/* <Image
-              src="/logo.svg"
-              width={83}
-              height={23}
-              className="w-[96px] h-[23px]"
-              alt="logo"
-            /> */}
-            {/* <Logo /> */}
-            <div>
-              <p>Blank_nerddd</p>
-            </div>
-          </a>
-        </h3>
-        <ul className="flex max-[520px]:hidden items-center gap-[2rem]">
+    <main
+      className="min-h-screen relative"
+      style={{
+        backgroundColor: 'var(--bg-base)',
+        color: 'var(--text-primary)',
+      }}
+    >
+      <SmoothScroll />
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <ParticleBackground />
+      </div>
+
+      <nav
+        className="fixed z-50 w-full top-0 flex items-center justify-between px-4 md:px-12 py-5 transition-all duration-300"
+        style={{
+          backgroundColor: 'var(--bg-base)',
+          borderBottom: '1px solid var(--border-color)',
+          backdropFilter: 'blur(20px)',
+        }}
+      >
+        <a
+          href="#home"
+          className="text-2xl md:text-3xl font-bold font-mono transition-transform duration-300 hover:scale-105"
+          style={{
+            background:
+              'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          RM
+        </a>
+        <ul className="hidden md:flex items-center gap-8">
           {navItems.map((item, idx) => (
-            <li
-              key={idx}
-              className="text-tunes-heading text-[17px] font-semibold transition-all duration-[.23s]"
-            >
-              <a href={item.link}>{item.name}</a>
+            <li key={idx}>
+              <a
+                href={item.link}
+                className="text-sm md:text-base font-medium uppercase tracking-widest relative group transition-all duration-300"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                <span className="font-mono text-xs mr-2 opacity-50">
+                  0{idx + 1}.
+                </span>
+                {item.name}
+                <span
+                  className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
+                  style={{
+                    backgroundColor: 'var(--accent-primary)',
+                  }}
+                ></span>
+              </a>
             </li>
           ))}
         </ul>
-        <MobileSidebar />
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <MobileSidebar />
+        </div>
       </nav>
+
       <section
         id="home"
-        className="min-h-screen py-[80px] bg-tunes-hero flex items-center"
+        className="min-h-screen flex items-center justify-center px-4 md:px-8 pt-20 relative"
       >
-        <section className="flex gap-[10rem] flex-col app-container">
-          <div className="flex justify-between max-[835px]:pt-10 max-[835px]:flex-col-reverse items-center gap-4">
-            <div className="flex gap-6 max-w-[50rem] flex-col">
-              <h1 className="text-hero leading-[1.2] font-bold">
-                Front-End React Developer 👋
-              </h1>
-              <h4 className="text-tunes-subheading font-medium text-primary leading-[1.6]">
-                Hi, I&apos;m Rodiat Morin. A passionate Front-end React
-                Developer based in Lagos, Nigeria. 📍
-              </h4>
-              <div className="flex items-center gap-[1.3rem]">
-                {socialLinks.map(({ Icon, link }, idx) => (
-                  <a
+        <div className="max-w-[95%] md:max-w-[80%] xl:max-w-[75%] w-full relative z-10">
+          <ScrollAnimation delay={100}>
+            <div className="flex items-center gap-4 mb-6">
+              <div
+                className="h-px w-16"
+                style={{
+                  background:
+                    'linear-gradient(90deg, var(--accent-primary), transparent)',
+                }}
+              ></div>
+              <p
+                className="text-base md:text-lg font-mono uppercase tracking-widest"
+                style={{ color: 'var(--accent-primary)' }}
+              >
+                Frontend Developer
+              </p>
+            </div>
+          </ScrollAnimation>
+
+          <ScrollAnimation delay={200}>
+            <h1
+              className="text-7xl md:text-9xl xl:text-[10rem] font-black mb-8 leading-[0.9] tracking-tight"
+              style={{
+                color: 'var(--text-primary)',
+                fontFamily: 'var(--font-display), serif',
+              }}
+            >
+              Rodiat
+              <br />
+              <span
+                className="inline-block"
+                style={{
+                  background:
+                    'linear-gradient(135deg, var(--text-primary), var(--accent-primary))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Morin
+              </span>
+            </h1>
+          </ScrollAnimation>
+
+          <ScrollAnimation delay={300}>
+            <p
+              className="text-2xl md:text-3xl mb-16 max-w-4xl leading-relaxed font-light"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              I design and develop beautiful, functional web experiences that
+              make a difference. Currently focused on building accessible,
+              human-centered products.
+            </p>
+          </ScrollAnimation>
+
+          <ScrollAnimation delay={400}>
+            <div className="flex flex-wrap items-center gap-6 mb-20">
+              {socialLinks.map(({ Icon, link }, idx) => (
+                <InteractiveLink
+                  key={idx}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl transition-all duration-300 relative group"
+                  style={{
+                    backgroundColor: 'var(--bg-card)',
+                    border: '1px solid var(--border-color)',
+                    color: 'var(--text-secondary)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                    e.currentTarget.style.color = 'var(--accent-primary)';
+                    e.currentTarget.style.transform =
+                      'translateY(-4px) scale(1.05)';
+                    e.currentTarget.style.boxShadow =
+                      '0 10px 30px rgba(139, 92, 246, 0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--border-color)';
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <Icon size={22} />
+                  <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-xs font-mono whitespace-nowrap pointer-events-none">
+                    {link.includes('github') ? 'GitHub' : 'LinkedIn'}
+                  </span>
+                </InteractiveLink>
+              ))}
+              <a
+                href="#contact"
+                className="px-8 py-4 rounded-xl font-semibold transition-all duration-300 relative overflow-hidden group"
+                style={{
+                  background:
+                    'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                  color: 'white',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow =
+                    '0 15px 40px rgba(139, 92, 246, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                Get in Touch
+                <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </a>
+            </div>
+          </ScrollAnimation>
+
+          <ScrollAnimation delay={500}>
+            <div className="flex flex-wrap items-center gap-8">
+              <span
+                className="text-sm md:text-base font-mono uppercase tracking-widest opacity-60"
+                style={{ color: 'var(--text-tertiary)' }}
+              >
+                Tech Stack
+              </span>
+              <div className="flex flex-wrap items-center gap-4">
+                {techStack.map((item, idx) => (
+                  <InteractiveDiv
                     key={idx}
-                    href={link}
-                    target="_blank"
-                    className="transition-all cursor-pointer hover:text-tunes-link duration-[0.2s] text-[3rem] text-tunes-heading"
+                    className="p-3 rounded-lg transition-all duration-300"
+                    style={{
+                      backgroundColor: 'var(--bg-card)',
+                      border: '1px solid var(--border-color)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor =
+                        'var(--accent-primary)';
+                      e.currentTarget.style.transform =
+                        'translateY(-4px) scale(1.1)';
+                      e.currentTarget.style.boxShadow =
+                        '0 8px 20px rgba(139, 92, 246, 0.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-color)';
+                      e.currentTarget.style.transform =
+                        'translateY(0) scale(1)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
                   >
-                    <Icon size={32} />
-                  </a>
+                    <Image
+                      width={60}
+                      height={34}
+                      className="h-7 w-auto opacity-70 transition-opacity duration-300"
+                      src={item}
+                      alt="tech"
+                      loading="lazy"
+                    />
+                  </InteractiveDiv>
                 ))}
               </div>
             </div>
-            <div className=" max-[500px]:w-full max-[500px]:h-auto max-[500px]:aspect-[1/1] hero-img"></div>
-          </div>
-          <div className="flex items-center gap-[3rem] flex-wrap text-primary text-tunes-paragraph">
-            <p className="font-semibold whitespace-nowrap pr-[2rem] text-tunes-heading border-r-2 border-r-tunes-border">
-              Tech Stack
-            </p>
-            {techStack.map((item, idx) => (
-              <span key={idx}>
-                <Image
-                  width={90}
-                  height={50}
-                  className="h-[5rem] cursor-pointer hover:translate-y-[-1rem] w-[9rem] duration-[0.3s] ease-in-out transition-all"
-                  src={item}
-                  alt="skill-icon"
-                  loading="lazy"
-                />
-              </span>
-            ))}
-          </div>
-        </section>
-      </section>
-      <section id="about" className="py-[15rem] bg-white">
-        <div className="app-container max-[800px]:flex-col max-[800px]:gap-6 flex items-center">
-          <div className="flex-1 relative">
-            <Image
-              src={AboutBg}
-              className="w-[80%] max-[800px]:w-full h-[35rem] rounded-[1.7rem] object-cover"
-              alt="about section background"
-            />
-            <span className="w-[19rem] h-[19rem] bottom-[-33px] shadow-sm right-[30px] rounded-[50%] bg-white absolute">
-              <Image
-                src={AboutIllustrator}
-                className="about-image"
-                alt="about section illustration"
-              />
-            </span>
-          </div>
-          <div className="flex-1 flex flex-col gap-5">
-            <div className="flex flex-col gap-[10px]">
-              <h3 className="section-heading">ABOUT ME</h3>
-              <h4 className="section-subheading">
-                Passionate Front-End Maestro
-                <br />
-                <span>Thriving in Lagos, Nigeria 🌐</span>
-              </h4>
-              <p
-                className={`text-primary text-justify text-tunes-paragraph font-medium leading-[1.5] ${mulish.className}`}
-              >
-                With over 3 years of experience as a dedicated Frontend
-                Engineer, I excel in crafting dynamic web applications using
-                TypeScript, React, and NextJs. My comprehensive understanding of
-                backend technologies like NodeJs, Express, and NestJS enables me
-                to create more efficient and well-integrated frontend solutions.
-                I leverage my full-stack knowledge to build seamless,
-                high-performing applications that offer a robust user
-                experience.
-              </p>
-            </div>
-          </div>
+          </ScrollAnimation>
         </div>
       </section>
-      <section id="projects" className="py-[15rem] bg-tunes-hero">
-        <div className="app-container flex gap-[6rem] flex-col">
-          <div className="flex flex-col gap-[1rem]">
-            <h3 className="section-heading">PORTFOLIO</h3>
-            <h4 className="section-subheading">
-              Each project is a unique piece of development 🧩
-            </h4>
-          </div>
-          <section className="flex flex-col gap-[5rem]">
-            {projects?.map((item, idx) => (
+
+      <section id="about" className="py-32 px-4 md:px-8 relative">
+        <div className="max-w-[95%] md:max-w-[80%] xl:max-w-[75%] mx-auto">
+          <ScrollAnimation delay={100}>
+            <div className="flex items-center gap-6 mb-16">
+              <span
+                className="font-mono text-2xl opacity-30"
+                style={{ color: 'var(--accent-primary)' }}
+              >
+                01.
+              </span>
+              <h2
+                className="text-6xl md:text-7xl lg:text-8xl font-bold"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                About Me
+              </h2>
               <div
-                key={idx}
-                className="bg-white shadow-lg flex items-center max-[800px]:flex-col gap-[8rem] p-[2rem] rounded-[1.7rem]"
-              >
-                <div className="w-[50%] h-full max-[800px]:w-full rounded-[1.7rem] bg-tunes-project overflow-hidden shadow-lg">
-                  <a href={item.liveLink} target="_blank">
-                    <Image
-                      src={item.image}
-                      width={530}
-                      height={3000}
-                      alt="project"
-                      className="h-auto w-full"
-                      style={{
-                        transition: 'transform 10s ease-in-out 0s',
-                      }}
-                    />
-                  </a>
-                </div>
-                <div className="flex  flex-col max-[800px]:w-full gap-[30px] h-full w-[50%] overflow-auto items-center">
-                  <div className="flex w-full flex-col gap-5">
-                    <h3 className="flex items-center gap-[0.2rem] font-bold text-tunes-heading text-primary">
-                      {item.name}
-                      {item.info && (
-                        <Tooltip label={item.info}>
-                          <span className="cursor-pointer hover:text-tunes-link">
-                            <MdInfoOutline />
-                          </span>
-                        </Tooltip>
-                      )}
-                    </h3>
-                    <p className="text-tunes-paragraph text-justify font-medium text-primary">
-                      {item.description}
-                    </p>
-                    <div className="flex flex-wrap w-full px-2 gap-[1rem]">
-                      {item.technologies.map((el, id) => (
-                        <Technology key={id} tech={el} />
-                      ))}
-                    </div>
-                  </div>
-                  <ProjectLink
-                    sourceCode={item.codeLink}
-                    live={item.liveLink}
-                  />
-                </div>
-              </div>
-            ))}
-          </section>
-        </div>
-      </section>
-      <section id="contact" className="py-[11rem] bg-white">
-        <div className="app-container flex gap-[6rem] flex-col">
-          <div className="flex flex-col gap-[1rem]">
-            <h3 className="section-heading">CONTACT</h3>
-            <p className="section-subheading">Hit me up! 👇</p>
-          </div>
-          <div className="flex items-center gap-[8rem] flex-wrap">
-            <div className="flex items-center gap-[1.5rem]">
-              <span className="w-[5rem] bg-white shadow-lg text-tunes-link rounded-full h-[5rem] flex items-center justify-center">
-                <TbMapSearch size={30} />
-              </span>
-              <div className="flex flex-col gap-[0.5rem]">
-                <h3 className="text-tunes-heading font-bold text-primary">
-                  Location
-                </h3>
-                <p className="text-tunes-paragraph text-primary">
-                  Lagos, Nigeria
+                className="flex-1 h-px ml-8"
+                style={{
+                  background:
+                    'linear-gradient(90deg, var(--border-color), transparent)',
+                }}
+              ></div>
+            </div>
+          </ScrollAnimation>
+
+          <div className="grid md:grid-cols-2 gap-16 items-start mt-10">
+            <ScrollAnimation delay={200}>
+              <div className="space-y-6">
+                <p
+                  className="text-xl md:text-3xl  leading-relaxed font-light"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Hello! I&apos;m Rodiat, a Front-end Developer based in Lagos,
+                  Nigeria.
+                </p>
+                <p
+                  className="text-xl md:text-3xl  leading-relaxed font-light"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  I enjoy creating things that live on the internet, whether
+                  that be websites, applications, or anything in between. My
+                  goal is to always build products that provide pixel-perfect,
+                  performant experiences.
+                </p>
+                <p
+                  className="text-xl md:text-3xl leading-relaxed font-light"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Here are a few technologies I&apos;ve been working with
+                  recently:
                 </p>
               </div>
-            </div>
-            <div className="flex items-center gap-[1.5rem]">
-              <span className="w-[5rem] bg-white shadow-lg text-tunes-link rounded-full h-[5rem] flex items-center justify-center">
-                <MdOutlineEmail size={30} />
-              </span>
-              <div className="flex flex-col gap-[0.5rem]">
-                <h3 className="text-tunes-heading font-bold text-primary">
-                  Mail
-                </h3>
-                <a
-                  href="mailto:babatundeadebowale1998@gmail.com"
-                  target="_blank"
-                  className="text-tunes-paragraph hover:text-tunes-link text-primary"
-                  style={{ wordBreak: 'break-word' }}
-                >
-                  ololade_morin@hotmail.com
-                </a>
+            </ScrollAnimation>
+
+            <ScrollAnimation delay={300}>
+              <div
+                className="p-8 rounded-2xl"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  border: '1px solid var(--border-color)',
+                }}
+              >
+                <ul className="grid grid-cols-2 gap-4">
+                  {[
+                    'JavaScript (ES6+)',
+                    'TypeScript',
+                    'React',
+                    'Next.js',
+                    'Node.js',
+                    'Express',
+                  ].map((tech, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-center text-lg md:text-xl font-mono"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      <span
+                        className="mr-3 text-lg"
+                        style={{ color: 'var(--accent-secondary)' }}
+                      >
+                        ▹
+                      </span>
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
-      <footer className="bg-tunes-heading py-[5rem]">
-        <div className="app-container flex max-[405px]:flex-col max-[405px]:gap-8 items-center justify-between">
-          <h3 className="text-primary text-white text-center font-bold">
-            Copyright © 2024. All rights are reserved
-          </h3>
-          <span className="flex items-center gap-[2rem]">
+
+      <section id="projects" className="py-32 px-4 md:px-8 relative">
+        <div className="max-w-[95%] md:max-w-[90%] xl:max-w-[75%] mx-auto">
+          <ScrollAnimation delay={100}>
+            <div className="flex items-center gap-6 mb-16">
+              <span
+                className="font-mono text-2xl opacity-30"
+                style={{ color: 'var(--accent-primary)' }}
+              >
+                02.
+              </span>
+              <h2
+                className="text-6xl md:text-7xl lg:text-8xl font-bold"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                Featured Projects
+              </h2>
+              <div
+                className="flex-1 h-px ml-8"
+                style={{
+                  background:
+                    'linear-gradient(90deg, var(--border-color), transparent)',
+                }}
+              ></div>
+            </div>
+          </ScrollAnimation>
+
+          <div className="space-y-32 md:mt-20">
+            {projects.map((project, idx) => (
+              <ScrollAnimation key={idx} delay={idx * 100}>
+                <div
+                  className={`flex items-center gap-12 ${
+                    idx % 2 === 1 ? 'md:flex-row-reverse' : ''
+                  } flex-col md:flex-row`}
+                >
+                  
+                  <div className="flex-1 w-full md:w-auto group">
+                    <div className="relative overflow-hidden rounded-lg">
+                      <a
+                        href={project.liveLink || project.codeLink || '#'}
+                        target={project.liveLink ? '_blank' : undefined}
+                        rel={
+                          project.liveLink ? 'noopener noreferrer' : undefined
+                        }
+                        className="block"
+                      >
+                        <Image
+                          src={project.image}
+                          width={700}
+                          height={450}
+                          alt={project.name}
+                          className=" object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </a>
+                    </div>
+                  </div>
+
+               
+                  <div className="flex-1 space-y-6">
+                    <div>
+                      <span
+                        className="text-sm md:text-base font-mono uppercase tracking-widest"
+                        style={{ color: 'var(--accent-primary)' }}
+                      >
+                        Featured Project
+                      </span>
+                      <h3
+                        className="text-5xl md:text-6xl lg:text-7xl font-bold mt-3 mb-4 flex items-center gap-3"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
+                        {project.name}
+                        {project.info && (
+                          <Tooltip label={project.info}>
+                            <span
+                              className="cursor-help"
+                              style={{ color: 'var(--accent-secondary)' }}
+                            >
+                              <MdInfoOutline size={24} />
+                            </span>
+                          </Tooltip>
+                        )}
+                      </h3>
+                    </div>
+
+                    <div
+                      className="p-6 rounded-lg"
+                      style={{
+                        backgroundColor: 'var(--bg-card)',
+                        border: '1px solid var(--border-color)',
+                      }}
+                    >
+                      <p
+                        className="text-xl md:text-2xl leading-relaxed mb-6"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        {typeof project.description === 'string'
+                          ? project.description
+                          : project.description}
+                      </p>
+
+                      <ul className="flex flex-wrap gap-2 mb-6">
+                        {project.technologies.map((tech, id) => (
+                          <li
+                            key={id}
+                            className="text-base md:text-lg font-mono"
+                            style={{ color: 'var(--text-tertiary)' }}
+                          >
+                            {tech}
+                            {id < project.technologies.length - 1 && (
+                              <span className="mx-2">•</span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="flex items-center gap-4">
+                        {project.codeLink && (
+                          <InteractiveLink
+                            href={project.codeLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-base md:text-lg font-mono transition-all"
+                            style={{ color: 'var(--text-secondary)' }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color =
+                                'var(--accent-primary)';
+                              e.currentTarget.style.transform =
+                                'translateX(4px)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color =
+                                'var(--text-secondary)';
+                              e.currentTarget.style.transform = 'translateX(0)';
+                            }}
+                          >
+                            <FiGithub size={20} />
+                            <span>Code</span>
+                          </InteractiveLink>
+                        )}
+                        {project.liveLink && (
+                          <InteractiveLink
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-base md:text-lg font-mono transition-all"
+                            style={{ color: 'var(--text-secondary)' }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color =
+                                'var(--accent-primary)';
+                              e.currentTarget.style.transform =
+                                'translateX(4px)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color =
+                                'var(--text-secondary)';
+                              e.currentTarget.style.transform = 'translateX(0)';
+                            }}
+                          >
+                            <HiOutlineExternalLink size={20} />
+                            <span>Live</span>
+                          </InteractiveLink>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section id="projects" className="py-32 px-4 md:px-8 relative">
+        <div className="max-w-[95%] md:max-w-[90%] xl:max-w-[75%] mx-auto">
+          <ScrollAnimation delay={100}>
+            <div className="flex items-center gap-6 mb-16">
+              <span
+                className="font-mono text-2xl opacity-30"
+                style={{ color: 'var(--accent-primary)' }}
+              >
+                03.
+              </span>
+              <h2
+                className="text-6xl md:text-7xl lg:text-8xl font-bold"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                Hobby Projects
+              </h2>
+              <div
+                className="flex-1 h-px ml-8"
+                style={{
+                  background:
+                    'linear-gradient(90deg, var(--border-color), transparent)',
+                }}
+              ></div>
+            </div>
+          </ScrollAnimation>
+
+          <div className="space-y-32 md:mt-20">
+            {hobbyProjects.map((project, idx) => (
+              <ScrollAnimation key={idx} delay={idx * 100}>
+                <div
+                  className={`flex items-center gap-12 ${
+                    idx % 2 === 1 ? 'md:flex-row-reverse' : ''
+                  } flex-col md:flex-row`}
+                >
+                  
+                  <div className="flex-1 w-full md:w-auto group">
+                    <div className="relative overflow-hidden rounded-lg">
+                      <a
+                        href={project.liveLink || project.codeLink || '#'}
+                        target={project.liveLink ? '_blank' : undefined}
+                        rel={
+                          project.liveLink ? 'noopener noreferrer' : undefined
+                        }
+                        className="block"
+                      >
+                        <Image
+                          src={project.image}
+                          width={700}
+                          height={450}
+                          alt={project.name}
+                          className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </a>
+                    </div>
+                  </div>
+
+               
+                  <div className="flex-1 space-y-6">
+                    <div>
+                      <span
+                        className="text-sm md:text-base font-mono uppercase tracking-widest"
+                        style={{ color: 'var(--accent-secondary)' }}
+                      >
+                        Hobby Project
+                      </span>
+                      <h3
+                        className="text-5xl md:text-6xl lg:text-7xl font-bold mt-3 mb-4 flex items-center gap-3"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
+                        {project.name}
+                        {/* {project?.info && (
+                          <Tooltip label={project?.info}>
+                            <span
+                              className="cursor-help"
+                              style={{ color: 'var(--accent-secondary)' }}
+                            >
+                              <MdInfoOutline size={24} />
+                            </span>
+                          </Tooltip>
+                        )} */}
+                      </h3>
+                    </div>
+
+                    <div
+                      className="p-6 rounded-lg"
+                      style={{
+                        backgroundColor: 'var(--bg-card)',
+                        border: '1px solid var(--border-color)',
+                      }}
+                    >
+                      <p
+                        className="text-xl md:text-2xl leading-relaxed mb-6"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        {typeof project.description === 'string'
+                          ? project.description
+                          : project.description}
+                      </p>
+
+                      <ul className="flex flex-wrap gap-2 mb-6">
+                        {project.technologies.map((tech, id) => (
+                          <li
+                            key={id}
+                            className="text-base md:text-lg font-mono"
+                            style={{ color: 'var(--text-tertiary)' }}
+                          >
+                            {tech}
+                            {id < project.technologies.length - 1 && (
+                              <span className="mx-2">•</span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="flex items-center gap-4">
+                        {project.codeLink && (
+                          <InteractiveLink
+                            href={project.codeLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-base md:text-lg font-mono transition-all"
+                            style={{ color: 'var(--text-secondary)' }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color =
+                                'var(--accent-primary)';
+                              e.currentTarget.style.transform =
+                                'translateX(4px)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color =
+                                'var(--text-secondary)';
+                              e.currentTarget.style.transform = 'translateX(0)';
+                            }}
+                          >
+                            <FiGithub size={20} />
+                            <span>Code</span>
+                          </InteractiveLink>
+                        )}
+                        {project.liveLink && (
+                          <InteractiveLink
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-base md:text-lg font-mono transition-all"
+                            style={{ color: 'var(--text-secondary)' }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color =
+                                'var(--accent-primary)';
+                              e.currentTarget.style.transform =
+                                'translateX(4px)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color =
+                                'var(--text-secondary)';
+                              e.currentTarget.style.transform = 'translateX(0)';
+                            }}
+                          >
+                            <HiOutlineExternalLink size={20} />
+                            <span>Live</span>
+                          </InteractiveLink>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="py-32 px-4 md:px-8 relative">
+        <div className="max-w-[95%] md:max-w-[85%] lg:max-w-[80%] mx-auto text-center">
+          <ScrollAnimation delay={100}>
+            <span
+              className="font-mono text-3xl md:text-4xl opacity-30 block mb-4"
+              style={{ color: 'var(--accent-primary)' }}
+            >
+              04.
+            </span>
+            <p
+              className="text-base md:text-lg font-mono uppercase tracking-widest mb-6"
+              style={{ color: 'var(--accent-primary)' }}
+            >
+              Get In Touch
+            </p>
+          </ScrollAnimation>
+
+          <ScrollAnimation delay={200}>
+            <h2
+              className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Let&apos;s work together
+            </h2>
+          </ScrollAnimation>
+
+          <ScrollAnimation delay={300}>
+            <p
+              className="text-xl md:text-2xl lg:text-3xl mb-12 leading-relaxed max-w-3xl mx-auto"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              I&apos;m always open to discussing new projects, creative ideas,
+              or opportunities to be part of your vision.
+            </p>
+          </ScrollAnimation>
+
+          <ScrollAnimation delay={400}>
+            <a
+              href="mailto:ololade_morin@hotmail.com"
+              className="inline-flex items-center gap-3 px-12 py-6 rounded-xl font-semibold text-xl md:text-2xl transition-all duration-300 relative overflow-hidden group"
+              style={{
+                background:
+                  'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))',
+                color: 'white',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform =
+                  'translateY(-4px) scale(1.05)';
+                e.currentTarget.style.boxShadow =
+                  '0 20px 50px rgba(139, 92, 246, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              Send Email
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">
+                →
+              </span>
+            </a>
+          </ScrollAnimation>
+        </div>
+      </section>
+
+      <footer
+        className="py-12 px-4 md:px-8 border-t"
+        style={{ borderColor: 'var(--border-color)' }}
+      >
+        <div className="max-w-[95%] md:max-w-[92%] lg:max-w-[90%] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <p
+            className="text-base md:text-lg font-mono"
+            style={{ color: 'var(--text-tertiary)' }}
+          >
+            © 2024 Rodiat Morin. Built with Next.js
+          </p>
+          <div className="flex items-center gap-6">
             {socialLinks.map(({ Icon, link }, idx) => (
-              <a
+              <InteractiveLink
                 key={idx}
                 href={link}
-                style={{ transition: 'all .2s ease-in-out' }}
-                className="cursor-pointer text-white hover:scale-[1.2] text-[2.3rem]"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-all"
+                style={{ color: 'var(--text-tertiary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--accent-primary)';
+                  e.currentTarget.style.transform =
+                    'translateY(-3px) scale(1.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--text-tertiary)';
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                }}
               >
-                <Icon size={36} />
-              </a>
+                <Icon size={20} />
+              </InteractiveLink>
             ))}
-          </span>
+          </div>
         </div>
       </footer>
     </main>

@@ -1,5 +1,5 @@
-import { HiOutlineExternalLink } from "react-icons/hi";
-import { FiGithub } from "react-icons/fi";
+import { HiOutlineExternalLink } from 'react-icons/hi';
+import { FiGithub } from 'react-icons/fi';
 
 function ProjectLink({
   sourceCode,
@@ -9,25 +9,29 @@ function ProjectLink({
   live?: string;
 }) {
   return (
-    <div className="flex justify-evenly w-full gap-[1rem] items-center">
-      {sourceCode ? (
+    <div className="flex justify-start w-full gap-[1.5rem] items-center flex-wrap">
+      {sourceCode && (
         <a
           href={sourceCode}
-          className="text-tunes-heading hover:text-tunes-link text-primary font-medium gap-[5px] flex items-center"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-slate-light hover:text-green-bright transition-colors"
+          aria-label="GitHub"
         >
-          Code
-          <FiGithub />
+          <FiGithub size={24} />
         </a>
-      ) : null}
-      {live ? (
+      )}
+      {live && (
         <a
           href={live}
-          className="text-tunes-heading hover:text-tunes-link text-primary font-medium gap-[5px] flex items-center"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-slate-light hover:text-green-bright transition-colors"
+          aria-label="External Link"
         >
-          Live Demo
-          <HiOutlineExternalLink />
+          <HiOutlineExternalLink size={24} />
         </a>
-      ) : null}
+      )}
     </div>
   );
 }
