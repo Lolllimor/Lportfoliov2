@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { HiOutlineExternalLink } from 'react-icons/hi';
 import { MdInfoOutline } from 'react-icons/md';
+import { useState, useEffect } from 'react';
 import { FiGithub } from 'react-icons/fi';
 import { Tooltip } from '@mantine/core';
 import Image from 'next/image';
+
+import { hobbyProjects, projects } from './constants/project-list';
 import ParticleBackground from './components/particle-background';
 import ScrollAnimation from './components/scroll-animation';
 import InteractiveLink from './components/interactive-link';
@@ -13,10 +15,10 @@ import InteractiveDiv from './components/interactive-div';
 import MobileSidebar from './components/mobile-sidebar';
 import { socialLinks } from './constants/social-links';
 import SmoothScroll from './components/smooth-scroll';
-import { hobbyProjects, projects } from './constants/project-list';
 import ThemeToggle from './components/theme-toggle';
 import { techStack } from './constants/tech-stack';
 import { navItems } from './constants/navlist';
+import { experience, skillCategories } from './constants/experience';
 
 export default function Home() {
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
@@ -148,9 +150,10 @@ export default function Home() {
               className="text-2xl md:text-3xl mb-16 max-w-4xl leading-relaxed font-light"
               style={{ color: 'var(--text-secondary)' }}
             >
-              I design and develop beautiful, functional web experiences that
-              make a difference. Currently focused on building accessible,
-              human-centered products.
+              Frontend developer building scalable, responsive web applications
+              with React, Next.js, TypeScript, and modern UI stacks. I care about
+              performance, reusable architecture, accessibility, and shipping
+              polished experiences across web and mobile.
             </p>
           </ScrollAnimation>
 
@@ -296,24 +299,24 @@ export default function Home() {
                   className="text-xl md:text-3xl  leading-relaxed font-light"
                   style={{ color: 'var(--text-secondary)' }}
                 >
-                  Hello! I&apos;m Rodiat, a Front-end Developer based in Lagos,
-                  Nigeria.
+                  Hello! I&apos;m Rodiat, a frontend developer based in Lagos,
+                  Nigeria. I partner with teams to ship interfaces that scale—from
+                  design systems and state management to API integration and
+                  performance tuning.
                 </p>
                 <p
                   className="text-xl md:text-3xl  leading-relaxed font-light"
                   style={{ color: 'var(--text-secondary)' }}
                 >
-                  I enjoy creating things that live on the internet, whether
-                  that be websites, applications, or anything in between. My
-                  goal is to always build products that provide pixel-perfect,
-                  performant experiences.
+                  I enjoy turning complex product requirements into clear,
+                  maintainable UI. Strong focus on clean code, accessibility, and
+                  collaborative delivery with designers, PMs, and stakeholders.
                 </p>
                 <p
                   className="text-xl md:text-3xl leading-relaxed font-light"
                   style={{ color: 'var(--text-secondary)' }}
                 >
-                  Here are a few technologies I&apos;ve been working with
-                  recently:
+                  Core technologies I use day to day:
                 </p>
               </div>
             </ScrollAnimation>
@@ -328,12 +331,12 @@ export default function Home() {
               >
                 <ul className="grid grid-cols-2 gap-4">
                   {[
-                    'JavaScript (ES6+)',
                     'TypeScript',
+                    'JavaScript (ES6+)',
                     'React',
                     'Next.js',
-                    'Node.js',
-                    'Express',
+                    'Redux',
+                    'HTML5 & CSS3',
                   ].map((tech, idx) => (
                     <li
                       key={idx}
@@ -353,6 +356,132 @@ export default function Home() {
               </div>
             </ScrollAnimation>
           </div>
+
+          <ScrollAnimation delay={400}>
+            <div
+              className="mt-16 p-8 md:p-10 rounded-2xl space-y-10"
+              style={{
+                backgroundColor: 'var(--bg-card)',
+                border: '1px solid var(--border-color)',
+              }}
+            >
+              <h3
+                className="text-2xl md:text-3xl font-bold font-mono uppercase tracking-widest"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                Skills & tooling
+              </h3>
+              <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-10">
+                {skillCategories.map((cat) => (
+                  <div key={cat.title} className="space-y-4">
+                    <p
+                      className="text-sm font-mono uppercase tracking-widest"
+                      style={{ color: 'var(--accent-primary)' }}
+                    >
+                      {cat.title}
+                    </p>
+                    <ul className="flex flex-wrap gap-2">
+                      {cat.items.map((item) => (
+                        <li
+                          key={item}
+                          className="text-sm md:text-base px-3 py-1.5 rounded-lg font-mono"
+                          style={{
+                            color: 'var(--text-secondary)',
+                            backgroundColor: 'var(--bg-base)',
+                            border: '1px solid var(--border-color)',
+                          }}
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollAnimation>
+        </div>
+      </section>
+
+      <section id="experience" className="py-32 px-4 md:px-8 relative">
+        <div className="max-w-[95%] md:max-w-[80%] xl:max-w-[75%] mx-auto">
+          <ScrollAnimation delay={100}>
+            <div className="flex items-center gap-6 mb-16">
+              <span
+                className="font-mono text-2xl opacity-30"
+                style={{ color: 'var(--accent-primary)' }}
+              >
+                02.
+              </span>
+              <h2
+                className="text-6xl md:text-7xl lg:text-8xl font-bold"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                Experience
+              </h2>
+              <div
+                className="flex-1 h-px ml-8"
+                style={{
+                  background:
+                    'linear-gradient(90deg, var(--border-color), transparent)',
+                }}
+              ></div>
+            </div>
+          </ScrollAnimation>
+
+          <div className="space-y-12 md:space-y-16">
+            {experience.map((job, idx) => (
+              <ScrollAnimation key={`${job.company}-${job.period}`} delay={idx * 80}>
+                <article
+                  className="p-8 md:p-10 rounded-2xl"
+                  style={{
+                    backgroundColor: 'var(--bg-card)',
+                    border: '1px solid var(--border-color)',
+                  }}
+                >
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+                    <div>
+                      <h3
+                        className="text-3xl md:text-4xl font-bold"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
+                        {job.company}
+                      </h3>
+                      <p
+                        className="text-lg md:text-xl mt-1 font-mono"
+                        style={{ color: 'var(--accent-secondary)' }}
+                      >
+                        {job.role}
+                        {job.location ? ` · ${job.location}` : ''}
+                      </p>
+                    </div>
+                    <span
+                      className="text-sm md:text-base font-mono uppercase tracking-widest shrink-0"
+                      style={{ color: 'var(--text-tertiary)' }}
+                    >
+                      {job.period}
+                    </span>
+                  </div>
+                  <ul className="space-y-3">
+                    {job.highlights.map((line) => (
+                      <li
+                        key={line}
+                        className="flex gap-3 text-lg md:text-xl leading-relaxed"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        <span
+                          className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full"
+                          style={{ backgroundColor: 'var(--accent-primary)' }}
+                          aria-hidden
+                        />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </ScrollAnimation>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -364,7 +493,7 @@ export default function Home() {
                 className="font-mono text-2xl opacity-30"
                 style={{ color: 'var(--accent-primary)' }}
               >
-                02.
+                03.
               </span>
               <h2
                 className="text-6xl md:text-7xl lg:text-8xl font-bold"
@@ -553,7 +682,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="projects" className="py-32 px-4 md:px-8 relative">
+      <section id="hobby-projects" className="py-32 px-4 md:px-8 relative">
         <div className="max-w-[95%] md:max-w-[90%] xl:max-w-[75%] mx-auto">
           <ScrollAnimation delay={100}>
             <div className="flex items-center gap-6 mb-16">
@@ -561,7 +690,7 @@ export default function Home() {
                 className="font-mono text-2xl opacity-30"
                 style={{ color: 'var(--accent-primary)' }}
               >
-                03.
+                04.
               </span>
               <h2
                 className="text-6xl md:text-7xl lg:text-8xl font-bold"
@@ -735,7 +864,7 @@ export default function Home() {
               className="font-mono text-3xl md:text-4xl opacity-30 block mb-4"
               style={{ color: 'var(--accent-primary)' }}
             >
-              04.
+              05.
             </span>
             <p
               className="text-base md:text-lg font-mono uppercase tracking-widest mb-6"
@@ -802,7 +931,7 @@ export default function Home() {
             className="text-base md:text-lg font-mono"
             style={{ color: 'var(--text-tertiary)' }}
           >
-            © 2024 Rodiat Morin. Built with Next.js
+            © 2026 Rodiat Morin. Built with Next.js
           </p>
           <div className="flex items-center gap-6">
             {socialLinks.map(({ Icon, link }, idx) => (

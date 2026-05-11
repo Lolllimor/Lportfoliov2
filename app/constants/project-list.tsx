@@ -78,13 +78,14 @@ export const projects = [
     name: 'Duduzili v2',
     technologies: [
       'React',
-      'Next.js',
+      'Redux',
+      'Mantine UI',
       'Tailwind CSS',
-      'Material UI',
-      'Websocket',
+      'WebSockets',
+      'Paystack',
     ],
     description:
-      'Duduzili is a social media and some of its features include creating posts visible by all users of the app, communities, chats (using Websocket), followings and followers, and a payment infrastructure (integrated with Paystack).',
+      'React-based media platform with posts, communities, real-time chat (WebSockets), social graph, and payments via Paystack—built with Redux and Mantine UI for scalable state and UI.',
   },
   {
     image: '/fotolocker.png',
@@ -100,7 +101,7 @@ export const projects = [
       'Stripe',
     ],
     description:
-      'Fotolocker is a platform for users to upload and share their photos with others. It allows users to upload photos, create albums, and share them with others. It also allows users to purchase photos from other users.',
+      'Photo sharing and digital marketplace: upload, organize, share, and sell photographs online. Responsive React and Next.js frontend; Cloudinary for uploads and image optimization; Stripe for secure checkout; Mantine UI and Tailwind CSS for reusable components and polish.',
   },
 ];
 
@@ -117,12 +118,12 @@ export const hobbyProjects = [
   },
   {
     image: '/emprinte.png',
-    name: 'Emprinte Readers  ',
+    name: 'Emprinte Readers',
     technologies: ['React', 'Next.js', 'Tailwind CSS'],
     codeLink: '',
     liveLink: 'https://emprinte-readers-hub.vercel.app/',
     description:
-      "Emprinte Readers is a platform dedicated to making Africa the world's most passionate reading community. The website helps readers grow, connect, and thrive through engaging projects and a vibrant online space.",
+      'Community-driven reading platform helping African readers connect and grow through curated literary initiatives. Responsive React and Next.js UI, reusable Tailwind components, and improved accessibility and mobile UX for community features.',
   },
   {
     image: '/quadmor2.png',

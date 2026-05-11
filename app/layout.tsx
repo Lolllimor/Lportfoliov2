@@ -26,9 +26,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Rodiat Morin - Front-end React Developer based in Lagos, Nigeria. 📍',
+  title: 'Rodiat Morin — Frontend Developer (React, Next.js, TypeScript)',
   description:
-    'A passionate Front-end React Developer based in Lagos, Nigeria. 📍',
+    'Frontend developer building scalable, responsive web apps with React, Next.js, and TypeScript. Focused on performance, reusable architecture, accessibility, and polished UX across web and mobile.',
   keywords: [
     'Software Developer',
     'Javascript',
