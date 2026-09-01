@@ -4,7 +4,6 @@ import '@mantine/core/styles.css';
 import './globals.css';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
-import { ThemeProvider } from './context/theme-context';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -43,21 +42,13 @@ export const metadata: Metadata = {
     'Material UI',
   ],
   authors: [{ name: 'Rodiat Morin ' }],
-  icons: [
-    {
-      rel: 'icon',
-      url: '/favicon-32x32.png',
-      type: 'image/png',
-      sizes: '32x32',
-    },
-    {
-      rel: 'icon',
-      url: '/favicon-16x16.png',
-      type: 'image/png',
-      sizes: '16x16',
-    },
-    { rel: 'apple-touch-icon', sizes: '180x180', url: '/apple-icon.png' },
-  ],
+  icons: {
+    icon: [
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+    ],
+    apple: { url: '/apple-icon.png', sizes: '180x180' },
+  },
   manifest: '/site.webmanifest',
 };
 
@@ -74,24 +65,11 @@ export default function RootLayout({
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const theme = localStorage.getItem('theme') || 
-                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-                document.documentElement.setAttribute('data-theme', theme);
-              })();
-            `,
-          }}
-        />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} font-sans`}
       >
-        <ThemeProvider>
-          <MantineProvider theme={theme}>{children}</MantineProvider>
-        </ThemeProvider>
+        <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>
   );
