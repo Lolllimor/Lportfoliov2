@@ -1,6 +1,6 @@
 export const projects = [
   {
-    image: '/hrms.jpeg',
+    image: '/hrms.png',
     liveLink: 'https://talentmanagement.africaexchange.com',
     info: 'Open on a large screen device, app is not responsive',
     codeLink: '',
@@ -102,6 +102,24 @@ export const projects = [
     ],
     description:
       'Photo sharing and digital marketplace: upload, organize, share, and sell photographs online. Responsive React and Next.js frontend; Cloudinary for uploads and image optimization; Stripe for secure checkout; Mantine UI and Tailwind CSS for reusable components and polish.',
+  },
+  {
+    image: '/buildestimate.png',
+    liveLink: 'https://buildestimate.ai/',
+    codeLink: '',
+    name: 'BuildEstimate',
+    technologies: ['React', 'Redux', 'Ant Design', 'Styled Components'],
+    description:
+      'A construction takeoff and cost-estimation platform for accurate material measurements and cost management, with headless and presentational component architecture for scalability.',
+  },
+  {
+    image: '/propulse.png',
+    liveLink: 'https://getpropulse.app/',
+    codeLink: '',
+    name: 'ProPulse',
+    technologies: ['React', 'Ant Design', 'Styled Components'],
+    description:
+      'A client-update tool giving clients real-time visibility into project status without installing any software—clarity without the back-and-forth.',
   },
 ];
 
