@@ -1,544 +1,441 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
 import {
-  Calendar,
-  MapPin,
-  Mail,
-  Clock,
-  Download,
-  User,
+  ArrowRight,
   Briefcase,
   Code2,
+  Send,
+  Sparkles,
+  User,
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import {
+  SiJavascript,
+  SiNestjs,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiReact,
+  SiRedux,
+  SiTailwindcss,
+  SiTypescript,
+} from 'react-icons/si';
 import Image from 'next/image';
+import { useRef } from 'react';
+import Link from 'next/link';
 
-import { hobbyProjects, projects } from './constants/project-list';
+import { featuredProjects } from './constants/project-list';
 import ScrollAnimation from './components/scroll-animation';
-import InteractiveLink from './components/interactive-link';
-import MobileSidebar from './components/mobile-sidebar';
-import { socialLinks } from './constants/social-links';
+import { socialLabel, socialLinks } from './constants/social-links';
 import SmoothScroll from './components/smooth-scroll';
 import ProjectCard from './components/project-card';
 import SectionHeading from './components/section-heading';
-import { navItems } from './constants/navlist';
-import { experience } from './constants/experience';
+import { experience, skillCategories } from './constants/experience';
+import WorldBackground from './components/world-background';
+import WorldMap from './components/world-map';
+import HeroWorld from './components/hero-world';
+import ConfettiBurst, { ConfettiHandle } from './components/confetti-burst';
+import Magnetic from './components/magnetic';
+import QuestLine from './components/quest-line';
+import QuickFacts from './components/quick-facts';
+import SiteNav from './components/site-nav';
+import SiteFooter from './components/site-footer';
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
+const techStack = [
+  { name: 'React', Icon: SiReact, color: '#149eca' },
+  { name: 'Next.js', Icon: SiNextdotjs, color: '#111111' },
+  { name: 'TypeScript', Icon: SiTypescript, color: '#3178c6' },
+  { name: 'JavaScript', Icon: SiJavascript, color: '#e5b900' },
+  { name: 'Node.js', Icon: SiNodedotjs, color: '#5fa04e' },
+  { name: 'NestJS', Icon: SiNestjs, color: '#e0234e' },
+  { name: 'Redux', Icon: SiRedux, color: '#764abc' },
+  { name: 'Tailwind', Icon: SiTailwindcss, color: '#06b6d4' },
+];
+
+const focusAreas = [
+  'Solution & system design',
+  'API design',
+  'Full-stack delivery',
+  'Access control & security flows',
+  'Payments & approval workflows',
+  'Real-time features',
+];
+
+const chipColors = ['#ede4ff', '#fde4f1', '#e0f2fe', '#dcfce7', '#fef3c7'];
 
 export default function Home() {
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
-
-  useEffect(() => {
-    const checkDevice = () => {
-      setIsMobileOrTablet(window.innerWidth < 1024);
-    };
-
-    checkDevice();
-    window.addEventListener('resize', checkDevice);
-
-    return () => window.removeEventListener('resize', checkDevice);
-  }, []);
-
+  const confettiRef = useRef<ConfettiHandle>(null);
   return (
-    <main
-      className="min-h-screen relative"
-      style={{
-        backgroundColor: 'var(--bg-base)',
-        color: 'var(--text-primary)',
-      }}
-    >
+    <main className="min-h-screen relative" style={{ color: 'var(--text-primary)' }}>
       <SmoothScroll />
+      <WorldBackground />
+      <WorldMap />
 
-      <nav
-        className="fixed z-50 top-4 md:top-6 left-4 right-4 md:left-8 md:right-8 lg:left-14 lg:right-14 flex items-center justify-between px-5 md:px-8 py-3.5 md:py-2 rounded-2xl"
-        style={{
-          backgroundColor: 'rgba(15, 23, 42, 0.72)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid var(--border-color)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.28)',
-        }}
-      >
-        <a href="#home" className="pointer-events-auto block shrink-0">
-          <Image
-            src="/logo1.png"
-            alt="Rodiat Morin"
-            width={74}
-            height={44}
-            className="h-11 w-auto"
-            priority
-          />
-        </a>
-        <ul className="hidden md:flex items-center gap-8 pointer-events-auto">
-          {navItems.map((item, idx) => (
-            <li key={idx}>
-              <a
-                href={item.link}
-                className="text-sm font-medium tracking-wide transition-colors hover:[color:var(--accent-primary)]"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                {item.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div className="flex items-center gap-3 pointer-events-auto">
-          <MobileSidebar />
-        </div>
-      </nav>
+      <SiteNav />
 
-      {/* Landing — full-bleed split */}
-      <section
-        id="home"
-        className="relative min-h-screen grid lg:grid-cols-2 overflow-hidden"
-      >
-        <div className="relative z-30 flex items-center px-6 md:px-12 lg:px-16 xl:px-20 pt-28 pb-16 lg:py-0 bg-[var(--bg-base)] lg:bg-transparent">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.12 } },
-            }}
-            className="w-full max-w-xl"
-          >
-            <motion.p
-              variants={fadeUp}
-              className="text-xs md:text-sm font-semibold uppercase tracking-[0.22em] mb-6"
-              style={{ color: 'var(--accent-primary)' }}
-            >
-              Hello, I&apos;m
-            </motion.p>
-
-            <motion.h1
-              variants={fadeUp}
-              className="text-6xl md:text-7xl xl:text-[5.5rem] font-bold mb-4 leading-[1.02] tracking-tight whitespace-nowrap"
-              style={{ color: 'var(--text-primary)' }}
-            >
-              Rodiat Morin
-            </motion.h1>
-
-            <motion.p
-              variants={fadeUp}
-              className="text-2xl md:text-3xl font-semibold mb-7"
-              style={{ color: 'var(--accent-primary)' }}
-            >
-              Frontend Developer
-            </motion.p>
-
-            <motion.p
-              variants={fadeUp}
-              className="text-lg md:text-xl mb-9 leading-relaxed max-w-md"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              I solve complex product problems with clean, accessible
-              frontend code — using React, Next.js, and TypeScript to turn
-              tricky requirements into software that just works.
-            </motion.p>
-
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-wrap items-center gap-3.5 mb-10"
-            >
-              <motion.a
-                href="#projects"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg font-semibold text-sm md:text-base"
-                style={{
-                  backgroundColor: 'var(--accent-primary)',
-                  color: 'white',
-                }}
-              >
-                View Projects
-                <span aria-hidden>→</span>
-              </motion.a>
-              <motion.a
-                href="/Rodiat_Morin_Resume.pdf"
-                download="Rodiat_Morin_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg font-semibold text-sm md:text-base"
-                style={{
-                  color: 'var(--text-primary)',
-                  backgroundColor: 'transparent',
-                  border: '1px solid var(--border-strong)',
-                }}
-              >
-                Download CV
-                <Download size={16} aria-hidden />
-              </motion.a>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-wrap items-center gap-6 md:gap-8"
-            >
-              {socialLinks.map(({ Icon, link }, idx) => {
-                const isEmail = link.startsWith('mailto:');
-                const label = link.includes('github')
-                  ? 'GitHub'
-                  : link.includes('linkedin')
-                    ? 'LinkedIn'
-                    : 'Email';
-                return (
-                  <motion.a
-                    key={idx}
-                    href={link}
-                    target={isEmail ? undefined : '_blank'}
-                    rel={isEmail ? undefined : 'noopener noreferrer'}
-                    aria-label={label}
-                    whileHover={{ y: -2 }}
-                    className="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-300 hover:[color:var(--accent-primary)]"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    <Icon size={18} aria-hidden />
-                    {label}
-                  </motion.a>
-                );
-              })}
-            </motion.div>
-          </motion.div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-0 min-h-[58vh] sm:min-h-[65vh] lg:min-h-screen order-first lg:order-none lg:absolute lg:inset-y-0 lg:right-0 lg:left-[56%]"
-        >
-          <Image
-            src="/profile-hero.jpeg"
-            fill
-            priority
-            quality={95}
-            sizes="(max-width: 1024px) 100vw, 44vw"
-            alt="Rodiat Morin"
-            className="object-cover object-bottom"
-          />
-          {/* Mobile: fade into content below */}
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-40 lg:hidden"
-            style={{
-              background:
-                'linear-gradient(to top, var(--bg-base), transparent)',
-            }}
-            aria-hidden
-          />
-        </motion.div>
-
-        {/* Full-width left-to-right blend — solid behind the text, easing out across the photo so it reads as one continuous scene */}
-        <div
-          className="pointer-events-none absolute inset-0 z-20 hidden lg:block"
-          style={{
-            background:
-              'linear-gradient(to right, var(--bg-base) 0%, var(--bg-base) 56%, rgba(15,23,42,0.3) 61%, rgba(15,23,42,0.12) 67%, transparent 74%)',
-          }}
-          aria-hidden
-        />
-      </section>
+      <HeroWorld />
 
       {/* About */}
-      <section
-        id="about"
-        className="py-20 md:py-28 px-6 md:px-12 lg:px-16 xl:px-20"
-        style={{ backgroundColor: 'var(--bg-elevated)' }}
-      >
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
+      <section id="about" className="py-20 md:py-28 px-4 md:px-8 lg:px-10">
+        <div className="max-w-6xl mx-auto">
           <ScrollAnimation delay={100}>
-            <div>
-              <SectionHeading icon={User} title="About Me" />
-              <p
-                className="text-base md:text-lg leading-relaxed"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                I&apos;m a frontend developer passionate about building modern,
-                performant web applications. I love turning complex problems
-                into simple, beautiful, and intuitive interfaces.
-              </p>
-            </div>
+            <SectionHeading number={1} icon={User} title="About Me" subtitle="Get to know me" />
           </ScrollAnimation>
 
-          <ScrollAnimation delay={200}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10 content-start md:pt-2">
-              {[
-                {
-                  Icon: Calendar,
-                  label: 'Experience',
-                  value: '2+ Years',
-                },
-                {
-                  Icon: MapPin,
-                  label: 'Location',
-                  value: 'Lagos, Nigeria',
-                },
-                {
-                  Icon: Mail,
-                  label: 'Email',
-                  value: 'rodiat.morin@gmail.com',
-                },
-                {
-                  Icon: Clock,
-                  label: 'Availability',
-                  value: 'Open to opportunities',
-                },
-              ].map(({ Icon, label, value }) => (
-                <div key={label} className="flex items-start gap-3.5">
-                  <span
-                    className="shrink-0 mt-0.5"
-                    style={{ color: 'var(--accent-primary)' }}
-                  >
-                    <Icon size={22} aria-hidden />
-                  </span>
-                  <div>
-                    <p
-                      className="text-base font-semibold"
-                      style={{ color: 'var(--text-primary)' }}
-                    >
-                      {label}
-                    </p>
-                    <p
-                      className="text-sm mt-0.5 break-all"
-                      style={{ color: 'var(--text-secondary)' }}
-                    >
-                      {value}
-                    </p>
-                  </div>
+          <div className="grid lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-5">
+            <ScrollAnimation delay={100}>
+              <div className="glass-card p-6 md:p-8 h-full">
+                <div className="space-y-4 text-base md:text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
+                  <p>
+                    I&apos;m a <strong style={{ color: 'var(--text-primary)' }}>solutions architect</strong> with
+                    4+ years of experience turning messy business requirements into
+                    systems that are simple to use and built to scale. I started on
+                    the frontend — and I still sweat the details there — but my work
+                    now spans the whole stack, from designing APIs and services in
+                    Node.js and NestJS to shaping the React and Next.js apps on top
+                    of them.
+                  </p>
+                  <p>
+                    I&apos;ve built across insurance, payments and internal enterprise
+                    platforms: role-based access for admins and underwriters,
+                    PIN-protected payout flows, claims and policy workflows, budget
+                    approvals, HR systems, and real-time chat over WebSockets. Along
+                    the way I&apos;ve learned that good architecture is mostly good
+                    decisions — clear module boundaries, predictable data flow, and
+                    building blocks a team can extend without fear.
+                  </p>
+                  <p>
+                    Today I focus on end-to-end solution design: mapping how
+                    services, data and interfaces fit together before a line of code
+                    is written, choosing the right tools for the job, translating
+                    between product, design and engineering — and staying hands-on
+                    enough to ship it.
+                  </p>
                 </div>
-              ))}
+                <ul className="flex flex-wrap gap-2">
+                  {focusAreas.map((area) => (
+                    <li
+                      key={area}
+                      data-jelly
+                      className="text-xs md:text-sm font-bold px-3 py-1.5 rounded-full cursor-default"
+                      style={{ color: 'var(--accent-secondary)', backgroundColor: 'var(--bg-chip)' }}
+                    >
+                      {area}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollAnimation>
+
+            <div className="grid gap-5 content-start">
+              <ScrollAnimation delay={150}>
+                <div className="glass-card p-6">
+                  <p className="eyebrow mb-4">Quick facts</p>
+                  <QuickFacts />
+                </div>
+              </ScrollAnimation>
+
+              <ScrollAnimation delay={200}>
+                <div className="glass-card p-6">
+                  <p className="eyebrow mb-4">Tech stack</p>
+                  <ul className="grid grid-cols-4 gap-3">
+                    {techStack.map(({ name, Icon, color }) => (
+                      <li key={name} className="flex flex-col items-center gap-1.5 group">
+                        <span data-hop className="w-12 h-12 rounded-2xl bg-white shadow-md flex items-center justify-center">
+                          <Icon size={24} color={color} aria-hidden />
+                        </span>
+                        <span className="text-[11px] font-bold" style={{ color: 'var(--text-secondary)' }}>
+                          {name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </ScrollAnimation>
+
+              <ScrollAnimation delay={300}>
+                <div className="glass-card p-6">
+                  <p className="eyebrow mb-4">Let&apos;s connect</p>
+                  <ul className="flex gap-4">
+                    {socialLinks.map(({ Icon, link }) => {
+                      const isEmail = link.startsWith('mailto:');
+                      const label = socialLabel(link);
+                      return (
+                        <li key={link}>
+                          <a
+                            href={link}
+                            target={isEmail ? undefined : '_blank'}
+                            rel={isEmail ? undefined : 'noopener noreferrer'}
+                            className="flex flex-col items-center gap-1.5 group"
+                          >
+                            <span data-hop className="w-12 h-12 rounded-2xl bg-white shadow-md flex items-center justify-center" style={{ color: 'var(--accent-primary)' }}>
+                              <Icon size={22} aria-hidden />
+                            </span>
+                            <span className="text-[11px] font-bold" style={{ color: 'var(--text-secondary)' }}>
+                              {label}
+                            </span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </ScrollAnimation>
+            </div>
+          </div>
+
+          <ScrollAnimation delay={150}>
+            <div className="glass-card p-6 md:p-8 mt-5">
+              <p className="eyebrow mb-5 flex items-center gap-2">
+                Skill inventory <Sparkles size={14} style={{ color: 'var(--accent-pink)' }} aria-hidden />
+              </p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {skillCategories.map((category, idx) => (
+                  <div key={category.title}>
+                    <p className="text-sm font-extrabold mb-2.5" style={{ color: 'var(--text-primary)' }}>
+                      {category.title}
+                    </p>
+                    <ul className="flex flex-wrap gap-1.5">
+                      {category.items.map((item) => (
+                        <li
+                          key={item}
+                          data-jelly
+                          className="text-xs font-bold px-2.5 py-1 rounded-full cursor-default"
+                          style={{
+                            backgroundColor: chipColors[idx % chipColors.length],
+                            color: 'var(--text-secondary)',
+                          }}
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </ScrollAnimation>
         </div>
       </section>
 
       {/* Featured Projects */}
-      <section
-        id="projects"
-        className="py-20 md:py-28 px-6 md:px-12 lg:px-16 xl:px-20"
-      >
+      <section id="projects" className="py-20 md:py-28 px-4 md:px-8 lg:px-10">
         <div className="max-w-6xl mx-auto">
           <ScrollAnimation delay={100}>
             <SectionHeading
+              number={2}
               icon={Code2}
-              title="Featured Projects"
+              title="Projects"
+              subtitle="Things I've built"
               action={{
-                label: 'View all projects',
+                label: 'More on GitHub',
                 href: 'https://github.com/Lolllimor',
               }}
             />
           </ScrollAnimation>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-            {[...projects, ...hobbyProjects].map((project, idx) => (
-              <ScrollAnimation key={`${project.name}-${idx}`} delay={idx * 80}>
-                <ProjectCard
-                  project={project}
-                  isMobileOrTablet={isMobileOrTablet}
-                />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {featuredProjects.map((project, idx) => (
+              <ScrollAnimation key={project.image} delay={(idx % 3) * 80}>
+                <ProjectCard project={project} />
               </ScrollAnimation>
             ))}
           </div>
+
+          <ScrollAnimation delay={100}>
+            <div className="mt-10 flex justify-center">
+              <Magnetic>
+                <Link
+                  href="/projects"
+                  className="btn-candy inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-extrabold"
+                >
+                  See more projects
+                  <ArrowRight size={16} aria-hidden />
+                </Link>
+              </Magnetic>
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 
-      {/* Experience */}
-      <section
-        id="experience"
-        className="py-20 md:py-28 px-6 md:px-12 lg:px-16 xl:px-20"
-        style={{ backgroundColor: 'var(--bg-elevated)' }}
-      >
+      {/* Experience — quest log */}
+      <section id="experience" className="py-20 md:py-28 px-4 md:px-8 lg:px-10">
         <div className="max-w-6xl mx-auto">
           <ScrollAnimation delay={100}>
-            <SectionHeading icon={Briefcase} title="Experience" />
+            <SectionHeading number={3} icon={Briefcase} title="Experience" subtitle="My quest log" />
           </ScrollAnimation>
 
-          <div className="space-y-6">
-            {experience.map((job, idx) => (
-              <ScrollAnimation
-                key={`${job.company}-${job.period}`}
-                delay={idx * 60}
-              >
-                <article
-                  className="p-6 md:p-8 rounded-xl"
-                  style={{ backgroundColor: 'var(--bg-card)' }}
-                >
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-5">
-                    <div>
-                      <h3
-                        className="text-xl md:text-2xl font-semibold"
-                        style={{ color: 'var(--text-primary)' }}
-                      >
-                        {job.company}
-                      </h3>
-                      <p
-                        className="text-base mt-1"
-                        style={{ color: 'var(--accent-primary)' }}
-                      >
-                        {job.role}
-                        {job.location ? ` · ${job.location}` : ''}
-                      </p>
-                    </div>
-                    <span
-                      className="text-sm shrink-0"
-                      style={{ color: 'var(--text-tertiary)' }}
-                    >
-                      {job.period}
-                      {job.employmentType ? ` · ${job.employmentType}` : ''}
-                    </span>
-                  </div>
-
-                  {job.projects ? (
-                    <div className="space-y-7">
-                      {job.projects.map((project) => (
-                        <div key={project.name}>
-                          <h4
-                            className="text-sm md:text-base font-semibold mb-3"
-                            style={{ color: 'var(--text-primary)' }}
-                          >
-                            {project.name}
-                          </h4>
-                          <ul className="space-y-2.5 mb-4">
-                            {project.highlights.map((line) => (
-                              <li
-                                key={line}
-                                className="flex gap-3 text-sm md:text-base leading-relaxed"
-                                style={{ color: 'var(--text-secondary)' }}
-                              >
-                                <span
-                                  className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full"
-                                  style={{ backgroundColor: 'var(--accent-primary)' }}
-                                  aria-hidden
-                                />
-                                <span>{line}</span>
-                              </li>
-                            ))}
-                          </ul>
-                          {project.tech && (
-                            <ul className="flex flex-wrap gap-2">
-                              {project.tech.map((tech) => (
-                                <li
-                                  key={tech}
-                                  className="text-xs font-medium px-3 py-1.5 rounded-md"
-                                  style={{
-                                    color: 'var(--accent-secondary)',
-                                    backgroundColor: 'var(--bg-base)',
-                                  }}
-                                >
-                                  {tech}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
+          <ol className="relative space-y-6 md:pl-14">
+            <span
+              className="hidden md:block absolute left-[1.2rem] top-4 bottom-4 border-l-[3px] border-dashed"
+              style={{ borderColor: 'var(--border-strong)' }}
+              aria-hidden
+            />
+            <QuestLine />
+            {experience.map((job, idx) => {
+              const isCurrent = job.period.includes('Present');
+              return (
+                <li key={`${job.company}-${job.period}`} className="relative">
+                  <span
+                    className="quest-node hidden md:flex absolute -left-14 top-6 w-10 h-10 rounded-full items-center justify-center text-sm font-extrabold border-[3px] border-white"
+                    style={{
+                      background: isCurrent ? 'linear-gradient(135deg, #a855f7, #ec4899)' : '#fff',
+                      color: isCurrent ? '#fff' : 'var(--accent-primary)',
+                      boxShadow: '0 6px 16px -6px rgba(124,58,237,0.5)',
+                    }}
+                    aria-hidden
+                  >
+                    {isCurrent ? '★' : experience.length - idx}
+                  </span>
+                  <ScrollAnimation delay={idx * 60}>
+                    <article className="glass-card p-6 md:p-8">
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-5">
+                        <div>
+                          <h3 className="text-xl md:text-2xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
+                            {job.company}
+                          </h3>
+                          <p className="text-base font-bold mt-1" style={{ color: 'var(--accent-primary)' }}>
+                            {job.role}
+                            {job.location ? ` · ${job.location}` : ''}
+                          </p>
                         </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <ul className="space-y-2.5">
-                      {job.highlights?.map((line) => (
-                        <li
-                          key={line}
-                          className="flex gap-3 text-sm md:text-base leading-relaxed"
-                          style={{ color: 'var(--text-secondary)' }}
-                        >
-                          <span
-                            className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full"
-                            style={{ backgroundColor: 'var(--accent-primary)' }}
-                            aria-hidden
-                          />
-                          <span>{line}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </article>
-              </ScrollAnimation>
-            ))}
-          </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          {isCurrent && (
+                            <span className="btn-candy text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                              Current quest
+                            </span>
+                          )}
+                          <span className="text-sm font-bold" style={{ color: 'var(--text-tertiary)' }}>
+                            {job.period}
+                            {job.employmentType ? ` · ${job.employmentType}` : ''}
+                          </span>
+                        </div>
+                      </div>
+
+                      {job.projects ? (
+                        <div className="space-y-7">
+                          {job.projects.map((project) => (
+                            <div key={project.name}>
+                              <h4 className="text-sm md:text-base font-extrabold mb-3" style={{ color: 'var(--text-primary)' }}>
+                                {project.name}
+                              </h4>
+                              <HighlightList lines={project.highlights} />
+                              {project.tech && (
+                                <ul className="flex flex-wrap gap-2 mt-4">
+                                  {project.tech.map((tech) => (
+                                    <li
+                                      key={tech}
+                                      data-jelly
+                                      className="text-xs font-bold px-3 py-1 rounded-full cursor-default"
+                                      style={{ color: 'var(--accent-secondary)', backgroundColor: 'var(--bg-chip)' }}
+                                    >
+                                      {tech}
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <HighlightList lines={job.highlights ?? []} />
+                      )}
+                    </article>
+                  </ScrollAnimation>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </section>
 
-      {/* Contact */}
-      <section
-        id="contact"
-        className="py-20 md:py-28 px-6 md:px-12 lg:px-16 xl:px-20"
-        style={{ backgroundColor: 'var(--bg-elevated)' }}
-      >
-        <div className="max-w-2xl mx-auto text-center">
+      {/* Contact — final level */}
+      <section id="contact" className="py-20 md:py-28 px-4 md:px-8 lg:px-10">
+        <div className="max-w-6xl mx-auto">
           <ScrollAnimation delay={100}>
-            <p
-              className="text-sm font-semibold uppercase tracking-[0.2em] mb-4"
-              style={{ color: 'var(--accent-primary)' }}
-            >
-              Get In Touch
-            </p>
-            <h2
-              className="text-4xl md:text-5xl font-bold mb-5"
-              style={{ color: 'var(--text-primary)' }}
-            >
-              Let&apos;s work together
-            </h2>
-            <p
-              className="text-base md:text-lg mb-10 leading-relaxed"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              I&apos;m always open to discussing new projects, creative ideas,
-              or opportunities to be part of your vision.
-            </p>
-            <a
-              href="mailto:rodiat.morin@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-base transition-opacity hover:opacity-90"
-              style={{
-                backgroundColor: 'var(--accent-primary)',
-                color: 'white',
-              }}
-            >
-              Send Email
-              <span aria-hidden>→</span>
-            </a>
+            <SectionHeading number={4} icon={Send} title="Contact" subtitle="Let's connect" />
+          </ScrollAnimation>
+          <ScrollAnimation delay={150}>
+            <div className="glass-card relative overflow-hidden p-8 md:p-12 grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-center">
+              <ConfettiBurst ref={confettiRef} />
+              <div className="relative mx-auto w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden border-[6px] border-white shadow-xl">
+                <Image
+                  src="/avatar.webp"
+                  fill
+                  sizes="208px"
+                  alt=""
+                  className="object-cover object-[50%_30%] scale-125"
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <button
+                  type="button"
+                  data-squish
+                  onClick={() => confettiRef.current?.burst()}
+                  className="text-sm font-extrabold uppercase tracking-[0.14em] mb-3"
+                  style={{ color: 'var(--accent-pink)' }}
+                  aria-label="Final level unlocked — celebrate again"
+                >
+                  Final level unlocked 🎉
+                </button>
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: 'var(--text-primary)' }}>
+                  Let&apos;s build something
+                </h2>
+                <p className="font-script text-4xl md:text-5xl font-bold gradient-text mb-5">
+                  fun together.
+                </p>
+                <p className="text-base md:text-lg mb-8 leading-relaxed max-w-lg mx-auto md:mx-0" style={{ color: 'var(--text-secondary)' }}>
+                  I&apos;m always open to discussing new projects, creative ideas,
+                  or opportunities to be part of your vision.
+                </p>
+                <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                  <Magnetic>
+                    <a
+                      href="mailto:rodiat.morin@gmail.com"
+                      className="btn-candy inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-extrabold"
+                    >
+                      Send Email
+                      <Send size={16} aria-hidden />
+                    </a>
+                  </Magnetic>
+                  {socialLinks
+                    .filter(({ link }) => !link.startsWith('mailto:'))
+                    .map(({ Icon, link }) => (
+                      <Magnetic key={link}>
+                        <a
+                          href={link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-soft inline-flex items-center gap-2 px-5 py-3.5 rounded-full font-extrabold"
+                        >
+                          <Icon size={18} aria-hidden />
+                          {socialLabel(link)}
+                        </a>
+                      </Magnetic>
+                    ))}
+                </div>
+              </div>
+            </div>
           </ScrollAnimation>
         </div>
       </section>
 
-      <footer
-        className="py-10 px-6 md:px-12 lg:px-16 xl:px-20 border-t"
-        style={{ borderColor: 'var(--border-color)' }}
-      >
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
-          <p
-            className="text-sm"
-            style={{ color: 'var(--text-tertiary)' }}
-          >
-            © 2026 Rodiat Morin. Built with Next.js
-          </p>
-          <div className="flex items-center gap-5">
-            {socialLinks.map(({ Icon, link }, idx) => (
-              <InteractiveLink
-                key={idx}
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors"
-                style={{ color: 'var(--text-tertiary)' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--accent-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--text-tertiary)';
-                }}
-              >
-                <Icon size={18} />
-              </InteractiveLink>
-            ))}
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
+  );
+}
+
+function HighlightList({ lines }: { lines: string[] }) {
+  return (
+    <ul className="space-y-2.5">
+      {lines.map((line) => (
+        <li
+          key={line}
+          className="flex gap-3 text-sm md:text-base leading-relaxed"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          <Sparkles size={14} className="mt-1 shrink-0" style={{ color: 'var(--accent-pink)' }} aria-hidden />
+          <span>{line}</span>
+        </li>
+      ))}
+    </ul>
   );
 }

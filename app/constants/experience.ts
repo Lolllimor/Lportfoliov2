@@ -119,6 +119,18 @@ export const skillCategories: { title: string; items: string[] }[] = [
     ],
   },
   {
+    title: 'Architecture & backend',
+    items: [
+      'Solution design',
+      'System design',
+      'API design',
+      'Node.js',
+      'NestJS',
+      'Role-based access control',
+      'Modular / headless architecture',
+    ],
+  },
+  {
     title: 'Frontend',
     items: [
       'React',

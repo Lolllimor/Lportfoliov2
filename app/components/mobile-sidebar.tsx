@@ -4,15 +4,17 @@ import { Burger, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import React from 'react';
 import { navItems } from '../constants/navlist';
+import { useNavHref } from '../hooks/use-nav-href';
 
 function MobileSidebar() {
   const [opened, { open, close, toggle }] = useDisclosure(false);
+  const navHref = useNavHref();
   return (
     <>
       <Burger
         opened={opened}
         onClick={toggle}
-        className="hidden max-[520px]:inline-block"
+        className="md:hidden"
         size="lg"
       />
       <Drawer
@@ -35,7 +37,7 @@ function MobileSidebar() {
               }}
             >
               <a
-                href={item.link}
+                href={navHref(item.link)}
                 className="w-full flex items-center gap-2"
                 onClick={close}
                 onMouseEnter={(e) => {
