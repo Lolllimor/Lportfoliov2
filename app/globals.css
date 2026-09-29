@@ -22,20 +22,23 @@
 }
 
 :root {
-  /* Dark theme — slate + violet (mockup) */
-  --bg-base: #0f172a;
-  --bg-elevated: #111827;
-  --bg-card: #1e293b;
-  --bg-border: #334155;
-  --bg-hover: #243044;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-tertiary: #64748b;
-  --accent-primary: #8b5cf6;
-  --accent-secondary: #a78bfa;
-  --accent-glow: #c084fc;
-  --border-color: rgba(148, 163, 184, 0.12);
-  --border-strong: rgba(248, 250, 252, 0.2);
+  /* Light theme — dreamy lavender world (matches the avatar's purple) */
+  --bg-base: #f6f1ff;
+  --bg-elevated: rgba(255, 255, 255, 0.55);
+  --bg-card: #ffffff;
+  --bg-border: #e9e1fb;
+  --bg-hover: #f1eaff;
+  --bg-chip: #f3edff;
+  --text-primary: #251a45;
+  --text-secondary: #5d5480;
+  --text-tertiary: #8c84a8;
+  --accent-primary: #7c3aed;
+  --accent-secondary: #6d28d9;
+  --accent-pink: #ec4899;
+  --accent-glow: #c4b5fd;
+  --border-color: rgba(124, 58, 237, 0.12);
+  --border-strong: rgba(124, 58, 237, 0.28);
+  --card-shadow: 0 12px 40px -14px rgba(91, 33, 182, 0.28);
 }
 
 html {
@@ -52,7 +55,7 @@ html {
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI',
     'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
   position: relative;
@@ -504,4 +507,223 @@ body {
 
 .theme-hover-primary:hover {
   color: var(--accent-primary);
+}
+
+.font-script {
+  font-family: var(--font-script), 'Caveat', cursive;
+}
+
+/* ---------- Quest world ---------- */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: var(--card-shadow);
+  border-radius: 1.5rem;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.pin-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border: 3px solid #fff;
+  box-shadow: 0 6px 18px -4px rgba(236, 72, 153, 0.55);
+}
+
+.btn-candy {
+  background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 55%, #ec4899 100%);
+  color: #fff;
+  box-shadow: 0 10px 24px -8px rgba(217, 70, 239, 0.65),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn-soft {
+  background: #fff;
+  color: var(--text-primary);
+  box-shadow: 0 8px 22px -10px rgba(91, 33, 182, 0.35),
+    inset 0 -3px 0 rgba(124, 58, 237, 0.08);
+}
+
+.xp-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #efe7ff;
+  overflow: hidden;
+}
+
+.xp-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+}
+
+.keycap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
+  border: 1.5px solid rgba(124, 58, 237, 0.25);
+  box-shadow: 0 4px 0 rgba(124, 58, 237, 0.2);
+  transition: box-shadow 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+
+.keycap[data-pressed='true'] {
+  box-shadow: 0 1px 0 rgba(124, 58, 237, 0.2);
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  color: #fff;
+}
+
+.sign-plank {
+  position: relative;
+  background: linear-gradient(180deg, #9a6a43 0%, #7c5132 100%);
+  color: #fff8ec;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.2), 0 6px 14px -6px rgba(60, 30, 10, 0.5);
+}
+
+.sticky-note {
+  background: linear-gradient(180deg, #fff9e8 0%, #fff3d1 100%);
+  box-shadow: 0 16px 30px -14px rgba(120, 80, 20, 0.35);
+}
+
+.sticky-note::before {
+  content: '';
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  width: 4.5rem;
+  height: 1.4rem;
+  transform: translateX(-50%) rotate(-4deg);
+  background: rgba(244, 114, 182, 0.55);
+  border-radius: 2px;
+}
+
+.sky {
+  background: radial-gradient(
+      60rem 40rem at 85% -10%,
+      rgba(244, 114, 182, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(
+      50rem 36rem at 0% 20%,
+      rgba(167, 139, 250, 0.3),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #ece3ff 0%, #f6efff 35%, #fdf2fa 70%, #f6f1ff 100%);
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(-30vw);
+  }
+  to {
+    transform: translateX(130vw);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(20deg);
+  }
+}
+
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.cloud {
+  animation: drift linear infinite;
+}
+
+.bob {
+  animation: bob 6s ease-in-out infinite;
+}
+
+.twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+.ping-soft {
+  animation: ping-soft 1.8s ease-out infinite;
+}
+
+.marquee {
+  animation: marquee 26s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud,
+  .bob,
+  .twinkle,
+  .ping-soft,
+  .marquee {
+    animation: none !important;
+  }
+}
+
+.scale-char {
+  display: inline-block;
+  background-image: linear-gradient(135deg, #8b5cf6 0%, #ff6b9d 100%);
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  will-change: transform;
 }

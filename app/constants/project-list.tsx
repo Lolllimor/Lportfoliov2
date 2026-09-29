@@ -121,6 +121,24 @@ export const projects = [
     description:
       'A client-update tool giving clients real-time visibility into project status without installing any software—clarity without the back-and-forth.',
   },
+  {
+    image: '/etap.png',
+    liveLink: 'https://etapinsure.com/',
+    codeLink: '',
+    name: 'ETAP',
+    technologies: ['React', 'Next.js', 'Tailwind CSS', 'Stripe'],
+    description:
+      'A digital insurance platform simplifying how drivers buy and manage car insurance—making coverage more accessible through seamless web experiences.',
+  },
+  {
+    image: '/quadmor3.png',
+    name: 'Quadmor Portfolio v3',
+    technologies: ['React', 'Next.js', 'Tailwind CSS'],
+    liveLink: 'https://www.quadmor.design/',
+    codeLink: '',
+    description:
+      'A complete redesign that deviates from the non-interactive v2 into a more aesthetically pleasing and interactive experience. Features engaging animations, interactive elements, and a modern design that enhances user engagement.',
+  },
 ];
 
 export const hobbyProjects = [
@@ -135,15 +153,6 @@ export const hobbyProjects = [
       "Quadmor Portfolio v1 is a portfolio website for Quadmor, a designer. It allows users to view the designer's portfolio and the services they offer.",
   },
   {
-    image: '/emprinte.png',
-    name: 'Emprinte Readers',
-    technologies: ['React', 'Next.js', 'Tailwind CSS'],
-    codeLink: '',
-    liveLink: 'https://emprinte-readers-hub.vercel.app/',
-    description:
-      'Community-driven reading platform helping African readers connect and grow through curated literary initiatives. Responsive React and Next.js UI, reusable Tailwind components, and improved accessibility and mobile UX for community features.',
-  },
-  {
     image: '/quadmor2.png',
     name: 'Quadmor Portfolio v2',
     technologies: ['React', 'Next.js', 'Tailwind CSS', 'Mantine UI'],
@@ -153,12 +162,31 @@ export const hobbyProjects = [
       "An evolved version of Quadmor's portfolio website with an improved design. Features enhanced visual aesthetics, better user experience, and refined design elements that showcase the designer's creative growth.",
   },
   {
-    image: '/quadmor3.png',
-    name: 'Quadmor Portfolio v3',
+    image: '/emprinte.png',
+    name: 'Emprinte Readers',
     technologies: ['React', 'Next.js', 'Tailwind CSS'],
-    liveLink: 'https://www.quadmor.design/',
     codeLink: '',
+    liveLink: 'https://emprinte-readers-hub.vercel.app/',
     description:
-      'A complete redesign that deviates from the non-interactive v2 into a more aesthetically pleasing and interactive experience. Features engaging animations, interactive elements, and a modern design that enhances user engagement.',
+      'Community-driven reading platform helping African readers connect and grow through curated literary initiatives. Responsive React and Next.js UI, reusable Tailwind components, and improved accessibility and mobile UX for community features.',
   },
 ];
+
+// Shown on the home page and at the top of /projects, in this order. Matched
+// by image since the two ticketing versions share a name.
+const featuredImages = [
+  '/hrms.png',
+  '/bms.jpeg',
+  '/ticketingv2.png',
+  '/fotolocker.png',
+  '/buildestimate.png',
+  '/etap.png',
+];
+
+export const featuredProjects = featuredImages.map(
+  (image) => projects.find((project) => project.image === image)!
+);
+
+export const moreProjects = projects.filter(
+  (project) => !featuredImages.includes(project.image)
+);

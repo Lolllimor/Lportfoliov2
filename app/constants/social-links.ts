@@ -15,3 +15,10 @@ export const socialLinks = [
     link: 'mailto:rodiat.morin@gmail.com',
   },
 ];
+
+export const socialLabel = (link: string) =>
+  link.includes('github')
+    ? 'GitHub'
+    : link.includes('linkedin')
+      ? 'LinkedIn'
+      : 'Email';

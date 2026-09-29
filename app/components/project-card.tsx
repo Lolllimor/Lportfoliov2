@@ -1,9 +1,13 @@
 'use client';
 
 import { Info } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { Tooltip } from '@mantine/core';
 import Image from 'next/image';
+
+import { useRef } from 'react';
+
+import { useIsMobileOrTablet } from '../hooks/use-is-mobile-or-tablet';
+import { canHover, gsap, prefersReducedMotion, useGSAP } from '../lib/gsap';
 
 interface ProjectCardProject {
   image: string;
@@ -17,30 +21,76 @@ interface ProjectCardProject {
 
 interface ProjectCardProps {
   project: ProjectCardProject;
-  isMobileOrTablet: boolean;
 }
 
-export default function ProjectCard({
-  project,
-  isMobileOrTablet,
-}: ProjectCardProps) {
+export default function ProjectCard({ project }: ProjectCardProps) {
+  const isMobileOrTablet = useIsMobileOrTablet();
   const isLocked = isMobileOrTablet && !!project.info;
   const href = project.liveLink || project.codeLink || '#';
+  const cardRef = useRef<HTMLElement>(null);
+  const shineRef = useRef<HTMLSpanElement>(null);
+
+  // 3D tilt toward the cursor, with a glossy shine that follows it.
+  useGSAP(() => {
+    const card = cardRef.current;
+    const shine = shineRef.current;
+    if (!card || !shine || prefersReducedMotion() || !canHover()) return;
+
+    gsap.set(card, { transformPerspective: 900 });
+    const ease = { duration: 0.5, ease: 'power3.out' };
+    const rotateX = gsap.quickTo(card, 'rotationX', ease);
+    const rotateY = gsap.quickTo(card, 'rotationY', ease);
+    const lift = gsap.quickTo(card, 'y', ease);
+
+    const onMove = (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      rotateY((px - 0.5) * 12);
+      rotateX((0.5 - py) * 12);
+      shine.style.setProperty('--shine-x', `${px * 100}%`);
+      shine.style.setProperty('--shine-y', `${py * 100}%`);
+    };
+    const onEnter = () => {
+      lift(-8);
+      gsap.to(shine, { opacity: 1, duration: 0.3 });
+    };
+    const onLeave = () => {
+      rotateX(0);
+      rotateY(0);
+      lift(0);
+      gsap.to(shine, { opacity: 0, duration: 0.4 });
+    };
+
+    card.addEventListener('mouseenter', onEnter);
+    card.addEventListener('mousemove', onMove);
+    card.addEventListener('mouseleave', onLeave);
+    return () => {
+      card.removeEventListener('mouseenter', onEnter);
+      card.removeEventListener('mousemove', onMove);
+      card.removeEventListener('mouseleave', onLeave);
+    };
+  });
 
   return (
-    <motion.article
-      className="group flex flex-col h-full rounded-lg overflow-hidden"
-      style={{
-        backgroundColor: 'var(--bg-card)',
-      }}
-      whileHover={{ y: -3 }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
+    <article
+      ref={cardRef}
+      className="group glass-card relative flex flex-col h-full overflow-hidden p-2.5 will-change-transform"
     >
+      <span
+        ref={shineRef}
+        className="pointer-events-none absolute inset-0 z-10 opacity-0"
+        style={{
+          background:
+            'radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.55), transparent 55%)',
+        }}
+        aria-hidden
+      />
       <a
         href={isLocked ? undefined : href}
         target={project.liveLink ? '_blank' : undefined}
         rel={project.liveLink ? 'noopener noreferrer' : undefined}
-        className="relative block h-36 overflow-hidden"
+        className="relative block h-40 overflow-hidden rounded-2xl"
         onClick={(e) => {
           if (isLocked) {
             e.preventDefault();
@@ -61,9 +111,9 @@ export default function ProjectCard({
         />
       </a>
 
-      <div className="flex flex-col flex-1 p-4">
+      <div className="flex flex-col flex-1 px-2 pt-3.5 pb-2">
         <h3
-          className="text-base font-semibold mb-1.5 flex items-center gap-1.5 leading-snug"
+          className="text-base font-extrabold mb-1.5 flex items-center gap-1.5 leading-snug"
           style={{ color: 'var(--text-primary)' }}
         >
           {project.name}
@@ -90,10 +140,10 @@ export default function ProjectCard({
           {project.technologies.slice(0, 3).map((tech) => (
             <li
               key={tech}
-              className="text-[10px] font-medium px-2 py-0.5 rounded"
+              className="text-[11px] font-bold px-2.5 py-0.5 rounded-full"
               style={{
                 color: 'var(--accent-secondary)',
-                backgroundColor: 'var(--bg-base)',
+                backgroundColor: 'var(--bg-chip)',
               }}
             >
               {tech}
@@ -106,7 +156,7 @@ export default function ProjectCard({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-auto inline-flex items-center gap-1 text-xs font-medium transition-opacity hover:opacity-80"
+            className="mt-auto inline-flex items-center gap-1 text-xs font-extrabold transition-opacity hover:opacity-80"
             style={{ color: 'var(--accent-primary)' }}
             onClick={(e) => {
               if (isLocked) {
@@ -119,6 +169,6 @@ export default function ProjectCard({
           </a>
         )}
       </div>
-    </motion.article>
+    </article>
   );
 }

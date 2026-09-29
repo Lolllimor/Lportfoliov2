@@ -1,13 +1,22 @@
 'use client';
 
-import { useEffect, useRef, useState, ReactNode } from 'react';
+import { useRef, ReactNode } from 'react';
+import { gsap, prefersReducedMotion, useGSAP } from '../lib/gsap';
 
 interface ScrollAnimationProps {
   children: ReactNode;
   className?: string;
+  /** Extra delay in milliseconds, handy for staggering siblings. */
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right';
 }
+
+const offsets = {
+  up: { y: 48 },
+  down: { y: -48 },
+  left: { x: 48 },
+  right: { x: -48 },
+};
 
 export default function ScrollAnimation({
   children,
@@ -15,67 +24,26 @@ export default function ScrollAnimation({
   delay = 0,
   direction = 'up',
 }: ScrollAnimationProps) {
-  const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            setIsVisible(true);
-          }, delay);
-          observer.unobserve(element);
-        }
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
-    );
-
-    observer.observe(element);
-
-    return () => {
-      observer.unobserve(element);
-    };
-  }, [delay]);
-
-  const getTransform = () => {
-    switch (direction) {
-      case 'down':
-        return 'translateY(-30px)';
-      case 'left':
-        return 'translateX(30px)';
-      case 'right':
-        return 'translateX(-30px)';
-      default:
-        return 'translateY(30px)';
-    }
-  };
-
-  const getInitialTransform = () => {
-    switch (direction) {
-      case 'down':
-        return '-translate-y-8';
-      case 'left':
-        return 'translate-x-8';
-      case 'right':
-        return '-translate-x-8';
-      default:
-        return 'translate-y-8';
-    }
-  };
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      gsap.from(ref.current, {
+        ...offsets[direction],
+        autoAlpha: 0,
+        scale: 0.97,
+        duration: 0.9,
+        delay: delay / 1000,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: ref.current, start: 'top 88%', once: true },
+      });
+    },
+    { dependencies: [delay, direction] }
+  );
 
   return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        isVisible
-          ? 'opacity-100 !translate-y-0 !translate-x-0'
-          : `opacity-0 ${getInitialTransform()}`
-      } ${className}`}
-    >
+    <div ref={ref} className={className}>
       {children}
     </div>
   );
