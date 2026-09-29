@@ -5,6 +5,7 @@ import './globals.css';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
 import MicroInteractions from './components/micro-interactions';
+import ScrollProgress from './components/scroll-progress';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -74,6 +75,7 @@ export default function RootLayout({
       >
         <MantineProvider theme={theme}>
           <MicroInteractions />
+          <ScrollProgress />
           {children}
         </MantineProvider>
       </body>

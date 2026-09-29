@@ -86,7 +86,7 @@ function Balloon() {
 }
 
 export default function HeroWorld() {
-  const pinsRef = useRef<HTMLUListElement>(null);
+  const pinsRef = useRef<HTMLDivElement>(null);
 
   // Map pins drop onto the map with a bounce.
   useGSAP(
@@ -248,7 +248,8 @@ export default function HeroWorld() {
           </div>
 
           {/* Map pins */}
-          <ul ref={pinsRef} className="hidden md:block">
+          <div ref={pinsRef}>
+          <ul className="hidden md:block">
             {navItems.slice(1).map((item, idx) => (
               <li
                 key={item.link}
@@ -280,6 +281,32 @@ export default function HeroWorld() {
               </li>
             ))}
           </ul>
+
+          {/* Phones: the same pins as a row of chips under the avatar */}
+          <ul className="md:hidden mt-6 grid grid-cols-2 gap-2.5">
+            {navItems.slice(1).map((item, idx) => (
+              <li key={item.link} className="map-pin">
+                <a
+                  href={item.link}
+                  data-jelly
+                  className="glass-card !rounded-2xl flex items-center gap-2 p-1.5 pr-3"
+                >
+                  <span className="pin-badge !w-8 !h-8 !text-[11px] !border-2">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-xs font-extrabold uppercase leading-tight" style={{ color: 'var(--text-primary)' }}>
+                      {item.name}
+                    </span>
+                    <span className="block text-[10px] font-semibold truncate" style={{ color: 'var(--text-tertiary)' }}>
+                      {item.subtitle}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          </div>
 
           {/* Wooden signpost */}
           <div className="hidden xl:flex flex-col items-start gap-1.5 absolute -left-12 -bottom-6 z-20" aria-hidden>

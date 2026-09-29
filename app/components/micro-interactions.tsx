@@ -62,11 +62,46 @@ function sparkle(x: number, y: number) {
   );
 }
 
+/** A small ring of sparkles where a finger taps (touch has no cursor trail). */
+function tapBurst(x: number, y: number) {
+  for (let i = 0; i < 6; i++) {
+    const angle = (i / 6) * Math.PI * 2 + random(-0.3, 0.3);
+    const spark = document.createElement('span');
+    spark.textContent = '✦';
+    spark.setAttribute('aria-hidden', 'true');
+    Object.assign(spark.style, {
+      position: 'fixed',
+      left: `${x}px`,
+      top: `${y}px`,
+      zIndex: '70',
+      pointerEvents: 'none',
+      fontSize: `${random(9, 13)}px`,
+      color: TRAIL_COLORS[i % TRAIL_COLORS.length],
+    });
+    document.body.appendChild(spark);
+    gsap.fromTo(
+      spark,
+      { xPercent: -50, yPercent: -50, scale: 0.4, opacity: 1 },
+      {
+        x: Math.cos(angle) * random(22, 34),
+        y: Math.sin(angle) * random(22, 34),
+        rotation: random(-120, 120),
+        scale: 0,
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        onComplete: () => spark.remove(),
+      }
+    );
+  }
+}
+
 /**
  * Site-wide micro-interactions via a few delegated listeners:
  * - squishy press on buttons (`.btn-candy`, `.btn-soft`, `[data-squish]`)
- * - jelly wobble on hover (`[data-jelly]`) and a squash-and-stretch hop (`[data-hop]`)
- * - a light sparkle trail following the cursor
+ * - jelly wobble (`[data-jelly]`) and a squash-and-stretch hop (`[data-hop]`),
+ *   on hover with a mouse and on tap with touch
+ * - a sparkle trail following the cursor, or a sparkle burst on each tap
  */
 export default function MicroInteractions() {
   useEffect(() => {
@@ -115,6 +150,22 @@ export default function MicroInteractions() {
       if (hopEl) hop(hopEl);
     };
 
+    // Touch: tap plays the hover effects, plus a sparkle burst. Uses `click`
+    // (not pointerdown) so starting a scroll gesture doesn't trigger it.
+    let lastPointerType = 'mouse';
+    const onPointerType = (e: PointerEvent) => {
+      lastPointerType = e.pointerType;
+    };
+    const onClick = (e: MouseEvent) => {
+      if (lastPointerType === 'mouse') return;
+      const target = e.target as Element | null;
+      const jellyEl = target?.closest(JELLY);
+      if (jellyEl && !gsap.isTweening(jellyEl)) jelly(jellyEl);
+      const hopEl = target?.closest(HOP);
+      if (hopEl && !gsap.isTweening(hopEl)) hop(hopEl);
+      tapBurst(e.clientX, e.clientY);
+    };
+
     let lastX = 0;
     let lastY = 0;
     const onMouseMove = (e: MouseEvent) => {
@@ -128,10 +179,14 @@ export default function MicroInteractions() {
 
     const trail = canHover();
     document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('pointerdown', onPointerType, true);
+    document.addEventListener('click', onClick);
     document.addEventListener('pointerover', onPointerOver);
     if (trail) window.addEventListener('mousemove', onMouseMove, { passive: true });
     return () => {
       document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('pointerdown', onPointerType, true);
+      document.removeEventListener('click', onClick);
       document.removeEventListener('pointerover', onPointerOver);
       window.removeEventListener('mousemove', onMouseMove);
     };

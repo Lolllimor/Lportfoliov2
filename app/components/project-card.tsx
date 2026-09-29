@@ -23,6 +23,45 @@ interface ProjectCardProps {
   project: ProjectCardProject;
 }
 
+/**
+ * Touch screens have no cursor to tilt toward, so instead the card tilts in 3D
+ * as it scrolls past, and presses in with a shine sweep when tapped.
+ */
+function touchCard(card: HTMLElement, shine: HTMLElement) {
+  gsap.set(card, { transformPerspective: 900 });
+  gsap.fromTo(
+    card,
+    { rotationX: 10 },
+    {
+      rotationX: -6,
+      ease: 'none',
+      scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true },
+    }
+  );
+
+  const press = () => {
+    gsap.to(card, { scale: 0.97, duration: 0.15, ease: 'power2.out', overwrite: 'auto' });
+    gsap.fromTo(
+      shine,
+      { opacity: 1, '--shine-x': '-20%', '--shine-y': '30%' },
+      { opacity: 0, '--shine-x': '120%', '--shine-y': '70%', duration: 0.8, ease: 'power2.out' }
+    );
+  };
+  const release = () =>
+    gsap.to(card, { scale: 1, duration: 0.6, ease: 'elastic.out(1.1, 0.4)', overwrite: 'auto' });
+
+  card.addEventListener('pointerdown', press);
+  card.addEventListener('pointerup', release);
+  card.addEventListener('pointercancel', release);
+  card.addEventListener('pointerleave', release);
+  return () => {
+    card.removeEventListener('pointerdown', press);
+    card.removeEventListener('pointerup', release);
+    card.removeEventListener('pointercancel', release);
+    card.removeEventListener('pointerleave', release);
+  };
+}
+
 export default function ProjectCard({ project }: ProjectCardProps) {
   const isMobileOrTablet = useIsMobileOrTablet();
   const isLocked = isMobileOrTablet && !!project.info;
@@ -34,7 +73,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   useGSAP(() => {
     const card = cardRef.current;
     const shine = shineRef.current;
-    if (!card || !shine || prefersReducedMotion() || !canHover()) return;
+    if (!card || !shine || prefersReducedMotion()) return;
+    if (!canHover()) return touchCard(card, shine);
 
     gsap.set(card, { transformPerspective: 900 });
     const ease = { duration: 0.5, ease: 'power3.out' };
