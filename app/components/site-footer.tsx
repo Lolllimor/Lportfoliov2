@@ -7,7 +7,17 @@ export default function SiteFooter() {
   return (
     <footer className="pb-10 pt-4 px-4 md:px-8 lg:px-10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
-        <div className="glass-card !rounded-full overflow-hidden w-full md:w-80 py-2.5" aria-hidden>
+        {/* No backdrop blur here: iOS Safari stops repainting animated content
+            inside a blurred, rounded, overflow-hidden box. */}
+        <div
+          className="marquee-track w-full md:w-80 py-2.5 rounded-full overflow-hidden"
+          style={{
+            background: 'rgba(255, 255, 255, 0.85)',
+            border: '1px solid rgba(255, 255, 255, 0.95)',
+            boxShadow: 'var(--card-shadow)',
+          }}
+          aria-hidden
+        >
           <div className="marquee flex w-max gap-6 text-sm font-extrabold" style={{ color: 'var(--text-secondary)' }}>
             {[0, 1].map((copy) => (
               <span key={copy} className="flex gap-6 pl-6">
