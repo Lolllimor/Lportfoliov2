@@ -263,9 +263,9 @@ export default function Home() {
             <SectionHeading number={3} icon={Briefcase} title="Experience" subtitle="My quest log" />
           </ScrollAnimation>
 
-          <ol className="relative space-y-6 md:pl-14">
+          <ol className="relative space-y-6 pl-12 md:pl-14">
             <span
-              className="hidden md:block absolute left-[1.2rem] top-4 bottom-4 border-l-[3px] border-dashed"
+              className="absolute left-[1.2rem] top-4 bottom-4 border-l-[3px] border-dashed"
               style={{ borderColor: 'var(--border-strong)' }}
               aria-hidden
             />
@@ -275,7 +275,7 @@ export default function Home() {
               return (
                 <li key={`${job.company}-${job.period}`} className="relative">
                   <span
-                    className="quest-node hidden md:flex absolute -left-14 top-6 w-10 h-10 rounded-full items-center justify-center text-sm font-extrabold border-[3px] border-white"
+                    className="quest-node flex absolute -left-[2.95rem] top-6 w-9 h-9 text-xs md:-left-14 md:w-10 md:h-10 md:text-sm rounded-full items-center justify-center font-extrabold border-[3px] border-white"
                     style={{
                       background: isCurrent ? 'linear-gradient(135deg, #a855f7, #ec4899)' : '#fff',
                       color: isCurrent ? '#fff' : 'var(--accent-primary)',
