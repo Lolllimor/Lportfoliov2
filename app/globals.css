@@ -680,10 +680,10 @@ body {
 
 @keyframes marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -705,6 +705,16 @@ body {
 
 .marquee {
   animation: marquee 26s linear infinite;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Keep the rounded clip on its own compositing layer (another iOS Safari fix). */
+.marquee-track {
+  isolation: isolate;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  transform: translateZ(0);
 }
 
 @media (prefers-reduced-motion: reduce) {

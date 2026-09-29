@@ -39,7 +39,7 @@ export default function QuestLine() {
   return (
     <span
       ref={lineRef}
-      className="block absolute left-[1.2rem] top-4 bottom-4 w-[3px] -translate-x-[1px] rounded-full origin-top"
+      className="block absolute left-[0.9rem] md:left-[1.2rem] top-4 bottom-4 w-[3px] -translate-x-[1px] rounded-full origin-top"
       style={{ background: 'linear-gradient(180deg, #a855f7, #ec4899)' }}
       aria-hidden
     />

@@ -263,9 +263,9 @@ export default function Home() {
             <SectionHeading number={3} icon={Briefcase} title="Experience" subtitle="My quest log" />
           </ScrollAnimation>
 
-          <ol className="relative space-y-6 pl-12 md:pl-14">
+          <ol className="relative space-y-6 pl-10 md:pl-14">
             <span
-              className="absolute left-[1.2rem] top-4 bottom-4 border-l-[3px] border-dashed"
+              className="absolute left-[0.9rem] md:left-[1.2rem] top-4 bottom-4 border-l-[3px] border-dashed"
               style={{ borderColor: 'var(--border-strong)' }}
               aria-hidden
             />
@@ -275,7 +275,7 @@ export default function Home() {
               return (
                 <li key={`${job.company}-${job.period}`} className="relative">
                   <span
-                    className="quest-node flex absolute -left-[2.95rem] top-6 w-9 h-9 text-xs md:-left-14 md:w-10 md:h-10 md:text-sm rounded-full items-center justify-center font-extrabold border-[3px] border-white"
+                    className="quest-node flex absolute -left-10 top-6 w-8 h-8 text-xs md:-left-14 md:w-10 md:h-10 md:text-sm rounded-full items-center justify-center font-extrabold border-[3px] border-white"
                     style={{
                       background: isCurrent ? 'linear-gradient(135deg, #a855f7, #ec4899)' : '#fff',
                       color: isCurrent ? '#fff' : 'var(--accent-primary)',
@@ -286,7 +286,7 @@ export default function Home() {
                     {isCurrent ? '★' : experience.length - idx}
                   </span>
                   <ScrollAnimation delay={idx * 60}>
-                    <article className="glass-card p-6 md:p-8">
+                    <article className="glass-card p-5 md:p-8">
                       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-5">
                         <div>
                           <h3 className="text-xl md:text-2xl font-extrabold" style={{ color: 'var(--text-primary)' }}>
@@ -297,13 +297,13 @@ export default function Home() {
                             {job.location ? ` · ${job.location}` : ''}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 shrink-0">
+                        <div className="flex flex-wrap items-center gap-2 md:shrink-0">
                           {isCurrent && (
-                            <span className="btn-candy text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                            <span className="btn-candy shrink-0 whitespace-nowrap text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full">
                               Current quest
                             </span>
                           )}
-                          <span className="text-sm font-bold" style={{ color: 'var(--text-tertiary)' }}>
+                          <span className="whitespace-nowrap text-sm font-bold" style={{ color: 'var(--text-tertiary)' }}>
                             {job.period}
                             {job.employmentType ? ` · ${job.employmentType}` : ''}
                           </span>
