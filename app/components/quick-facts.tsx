@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { Calendar, Check, Clock, Copy, LucideIcon, Mail, MapPin } from 'lucide-react';
+import { trackEvent } from '../lib/analytics';
 import { gsap, prefersReducedMotion } from '../lib/gsap';
 
 const EMAIL = 'rodiat.morin@gmail.com';
@@ -82,6 +83,7 @@ function CopyFact({ Icon, label, value, bg }: (typeof facts)[number]) {
       return;
     }
     setCopied(true);
+    trackEvent('email_copy');
     const bubble = bubbleRef.current;
     if (bubble && !prefersReducedMotion()) {
       gsap

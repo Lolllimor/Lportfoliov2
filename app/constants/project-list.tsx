@@ -85,7 +85,7 @@ export const projects = [
       'Paystack',
     ],
     description:
-      'React-based media platform with posts, communities, real-time chat (WebSockets), social graph, and payments via Paystack—built with Redux and Mantine UI for scalable state and UI.',
+      'React-based media platform with posts, communities, real-time chat (WebSockets), social graph, and payments via Paystack, built with Redux and Mantine UI for scalable state and UI.',
   },
   {
     image: '/fotolocker.png',
@@ -119,7 +119,7 @@ export const projects = [
     name: 'ProPulse',
     technologies: ['React', 'Ant Design', 'Styled Components'],
     description:
-      'A client-update tool giving clients real-time visibility into project status without installing any software—clarity without the back-and-forth.',
+      'A client-update tool giving clients real-time visibility into project status without installing any software. Clarity without the back-and-forth.',
   },
   {
     image: '/etap.png',
@@ -128,7 +128,7 @@ export const projects = [
     name: 'ETAP',
     technologies: ['React', 'Next.js', 'Tailwind CSS', 'Stripe'],
     description:
-      'A digital insurance platform simplifying how drivers buy and manage car insurance—making coverage more accessible through seamless web experiences.',
+      'A digital insurance platform simplifying how drivers buy and manage car insurance, making coverage more accessible through seamless web experiences.',
   },
   {
     image: '/quadmor3.png',

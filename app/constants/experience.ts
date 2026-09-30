@@ -22,10 +22,10 @@ export const experience: ExperienceItem[] = [
     employmentType: 'Full-time',
     projects: [
       {
-        name: 'Balloon — Insurance Backoffice & Landing Page',
+        name: 'Balloon: Insurance Backoffice & Landing Page',
         highlights: [
           'Owned major parts of the Balloon frontend, including the wallet, policy, and admin modules, plus the public marketing landing page, both shipped to production.',
-          'Shipped a multi-step underwriter payout flow — select pending transactions, preview settlement, choose destination account, confirm with PIN — with conflict and rejected-transaction handling from the API.',
+          'Shipped a multi-step underwriter payout flow (select pending transactions, preview settlement, choose destination account, confirm with PIN), with conflict and rejected-transaction handling from the API.',
           'Implemented role-based access (platform admin, underwriter admin, view-only) and transaction PIN setup/update/reset with PIN-lock handling, so payouts require more than a password.',
           'Wired wallet data with TanStack Query and Axios, with shared error parsing for 4xx and conflict responses.',
         ],
@@ -42,10 +42,10 @@ export const experience: ExperienceItem[] = [
         ],
       },
       {
-        name: 'ETAP Insure — Public Site & Ops Backoffice',
+        name: 'ETAP Insure: Public Site & Ops Backoffice',
         highlights: [
           'Shipped the public site at etapinsure.com, including the car insurance quote flow, plan selection, pay-monthly, and claims pages.',
-          'Implemented core modules of the internal ops backoffice — customers, policies, claims, vehicle-lookup leads, and admin users — including a leads workspace with table views and CSV export.',
+          'Implemented core modules of the internal ops backoffice (customers, policies, claims, vehicle-lookup leads, and admin users), including a leads workspace with table views and CSV export.',
           'Contributed to claims and policy flows: claim documents, settlement notes, policy edit/renewal, proof uploads, and enterprise policy selection.',
           'Shipped via GitHub and Vercel across staging and production, including PR reviews and hotfixes.',
         ],

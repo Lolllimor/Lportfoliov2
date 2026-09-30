@@ -37,6 +37,7 @@ import Magnetic from './components/magnetic';
 import QuestLine from './components/quest-line';
 import QuickFacts from './components/quick-facts';
 import SiteNav from './components/site-nav';
+import { trackEvent } from './lib/analytics';
 import SiteFooter from './components/site-footer';
 
 const techStack = [
@@ -73,11 +74,51 @@ export default function Home() {
 
       <HeroWorld />
 
+      {/* Featured Projects */}
+      <section id="projects" className="py-20 md:py-28 px-4 md:px-8 lg:px-10">
+        <div className="max-w-6xl mx-auto">
+          <ScrollAnimation delay={100}>
+            <SectionHeading
+              number={1}
+              icon={Code2}
+              title="Projects"
+              subtitle="Things I've built"
+              action={{
+                label: 'More on GitHub',
+                href: 'https://github.com/Lolllimor',
+              }}
+            />
+          </ScrollAnimation>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {featuredProjects.map((project, idx) => (
+              <ScrollAnimation key={project.image} delay={(idx % 3) * 80}>
+                <ProjectCard project={project} />
+              </ScrollAnimation>
+            ))}
+          </div>
+
+          <ScrollAnimation delay={100}>
+            <div className="mt-10 flex justify-center">
+              <Magnetic>
+                <Link
+                  href="/projects"
+                  className="btn-candy inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-extrabold"
+                >
+                  See more projects
+                  <ArrowRight size={16} aria-hidden />
+                </Link>
+              </Magnetic>
+            </div>
+          </ScrollAnimation>
+        </div>
+      </section>
+
       {/* About */}
       <section id="about" className="py-20 md:py-28 px-4 md:px-8 lg:px-10">
         <div className="max-w-6xl mx-auto">
           <ScrollAnimation delay={100}>
-            <SectionHeading number={1} icon={User} title="About Me" subtitle="Get to know me" />
+            <SectionHeading number={2} icon={User} title="About Me" subtitle="Get to know me" />
           </ScrollAnimation>
 
           <div className="grid lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-5">
@@ -88,7 +129,7 @@ export default function Home() {
                     I&apos;m a <strong style={{ color: 'var(--text-primary)' }}>solutions architect</strong> with
                     4+ years of experience turning messy business requirements into
                     systems that are simple to use and built to scale. I started on
-                    the frontend — and I still sweat the details there — but my work
+                    the frontend, and I still sweat the details there, but my work
                     now spans the whole stack, from designing APIs and services in
                     Node.js and NestJS to shaping the React and Next.js apps on top
                     of them.
@@ -99,14 +140,14 @@ export default function Home() {
                     PIN-protected payout flows, claims and policy workflows, budget
                     approvals, HR systems, and real-time chat over WebSockets. Along
                     the way I&apos;ve learned that good architecture is mostly good
-                    decisions — clear module boundaries, predictable data flow, and
+                    decisions: clear module boundaries, predictable data flow, and
                     building blocks a team can extend without fear.
                   </p>
                   <p>
                     Today I focus on end-to-end solution design: mapping how
                     services, data and interfaces fit together before a line of code
                     is written, choosing the right tools for the job, translating
-                    between product, design and engineering — and staying hands-on
+                    between product, design and engineering, and staying hands-on
                     enough to ship it.
                   </p>
                 </div>
@@ -164,6 +205,11 @@ export default function Home() {
                             href={link}
                             target={isEmail ? undefined : '_blank'}
                             rel={isEmail ? undefined : 'noopener noreferrer'}
+                            onClick={() =>
+                              isEmail
+                                ? trackEvent('email_click', { from: 'about' })
+                                : trackEvent('social_click', { network: label, from: 'about' })
+                            }
                             className="flex flex-col items-center gap-1.5 group"
                           >
                             <span data-hop className="w-12 h-12 rounded-2xl bg-white shadow-md flex items-center justify-center" style={{ color: 'var(--accent-primary)' }}>
@@ -211,46 +257,6 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </div>
-          </ScrollAnimation>
-        </div>
-      </section>
-
-      {/* Featured Projects */}
-      <section id="projects" className="py-20 md:py-28 px-4 md:px-8 lg:px-10">
-        <div className="max-w-6xl mx-auto">
-          <ScrollAnimation delay={100}>
-            <SectionHeading
-              number={2}
-              icon={Code2}
-              title="Projects"
-              subtitle="Things I've built"
-              action={{
-                label: 'More on GitHub',
-                href: 'https://github.com/Lolllimor',
-              }}
-            />
-          </ScrollAnimation>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featuredProjects.map((project, idx) => (
-              <ScrollAnimation key={project.image} delay={(idx % 3) * 80}>
-                <ProjectCard project={project} />
-              </ScrollAnimation>
-            ))}
-          </div>
-
-          <ScrollAnimation delay={100}>
-            <div className="mt-10 flex justify-center">
-              <Magnetic>
-                <Link
-                  href="/projects"
-                  className="btn-candy inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-extrabold"
-                >
-                  See more projects
-                  <ArrowRight size={16} aria-hidden />
-                </Link>
-              </Magnetic>
             </div>
           </ScrollAnimation>
         </div>
@@ -372,7 +378,7 @@ export default function Home() {
                   onClick={() => confettiRef.current?.burst()}
                   className="text-sm font-extrabold uppercase tracking-[0.14em] mb-3"
                   style={{ color: 'var(--accent-pink)' }}
-                  aria-label="Final level unlocked — celebrate again"
+                  aria-label="Final level unlocked. Celebrate again"
                 >
                   Final level unlocked 🎉
                 </button>
@@ -390,6 +396,7 @@ export default function Home() {
                   <Magnetic>
                     <a
                       href="mailto:rodiat.morin@gmail.com"
+                      onClick={() => trackEvent('email_click', { from: 'contact' })}
                       className="btn-candy inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-extrabold"
                     >
                       Send Email
@@ -404,6 +411,7 @@ export default function Home() {
                           href={link}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() => trackEvent('social_click', { network: socialLabel(link), from: 'contact' })}
                           className="btn-soft inline-flex items-center gap-2 px-5 py-3.5 rounded-full font-extrabold"
                         >
                           <Icon size={18} aria-hidden />

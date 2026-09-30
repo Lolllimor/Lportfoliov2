@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useRef } from 'react';
 
 import { useIsMobileOrTablet } from '../hooks/use-is-mobile-or-tablet';
+import { trackEvent } from '../lib/analytics';
 import { canHover, gsap, prefersReducedMotion, useGSAP } from '../lib/gsap';
 
 interface ProjectCardProject {
@@ -135,7 +136,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           if (isLocked) {
             e.preventDefault();
             e.stopPropagation();
+            return;
           }
+          trackEvent('project_click', { project: project.name });
         }}
         style={{
           pointerEvents: isLocked ? 'none' : 'auto',
@@ -201,7 +204,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             onClick={(e) => {
               if (isLocked) {
                 e.preventDefault();
+                return;
               }
+              trackEvent('project_click', { project: project.name });
             }}
           >
             View Project

@@ -38,7 +38,7 @@
   --accent-glow: #c4b5fd;
   --border-color: rgba(124, 58, 237, 0.12);
   --border-strong: rgba(124, 58, 237, 0.28);
-  --card-shadow: 0 12px 40px -14px rgba(91, 33, 182, 0.28);
+  --card-shadow: 0 16px 36px -18px rgba(91, 33, 182, 0.12);
 }
 
 html {

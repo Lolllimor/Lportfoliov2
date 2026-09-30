@@ -5,14 +5,14 @@ export const navItems = [
     subtitle: 'Start here',
   },
   {
-    name: 'About',
-    link: '#about',
-    subtitle: 'Get to know me',
-  },
-  {
     name: 'Projects',
     link: '#projects',
     subtitle: "Things I've built",
+  },
+  {
+    name: 'About',
+    link: '#about',
+    subtitle: 'Get to know me',
   },
   {
     name: 'Experience',

@@ -3,9 +3,12 @@ import { Caveat, JetBrains_Mono, Nunito } from 'next/font/google';
 import '@mantine/core/styles.css';
 import './globals.css';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { Analytics } from '@vercel/analytics/next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { theme } from '../theme';
 import MicroInteractions from './components/micro-interactions';
 import ScrollProgress from './components/scroll-progress';
+import { GA_ID } from './lib/analytics';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -27,9 +30,9 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: 'Rodiat Morin — Solutions Architect (Node.js, NestJS, React, Next.js)',
+  title: 'Rodiat Morin, Solutions Architect (Node.js, NestJS, React, Next.js)',
   description:
-    'Solutions architect with 4+ years designing and shipping full-stack products — Node.js and NestJS services, React and Next.js interfaces. Focused on clear system design, secure workflows, and software that scales.',
+    'Solutions architect with 4+ years designing and shipping full-stack products: Node.js and NestJS services, React and Next.js interfaces. Focused on clear system design, secure workflows, and software that scales.',
   keywords: [
     'Software Developer',
     'Javascript',
@@ -78,7 +81,9 @@ export default function RootLayout({
           <ScrollProgress />
           {children}
         </MantineProvider>
+        <Analytics />
       </body>
+      {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>
   );
 }
