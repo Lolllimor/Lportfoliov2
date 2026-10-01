@@ -1,15 +1,17 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Calendar, Check, Clock, Copy, LucideIcon, Mail, MapPin } from 'lucide-react';
+import { Calendar, Check, Clock, Copy, LucideIcon, Mail, MapPin, Phone } from 'lucide-react';
+import { trackEvent } from '../lib/analytics';
 import { gsap, prefersReducedMotion } from '../lib/gsap';
 
 const EMAIL = 'rodiat.morin@gmail.com';
 
 const facts: { Icon: LucideIcon; label: string; value: string; bg: string; copy?: boolean }[] = [
-  { Icon: Calendar, label: 'Experience', value: '4+ Years', bg: '#ede4ff' },
+  { Icon: Calendar, label: 'Experience', value: '3+ Years', bg: '#ede4ff' },
   { Icon: MapPin, label: 'Location', value: 'Lagos, Nigeria', bg: '#fde4f1' },
   { Icon: Mail, label: 'Email', value: EMAIL, bg: '#e0f2fe', copy: true },
+  { Icon: Phone, label: 'Phone', value: '+234 903 603 3530', bg: '#fef3c7' },
   { Icon: Clock, label: 'Availability', value: 'Open to opportunities', bg: '#dcfce7' },
 ];
 
@@ -82,6 +84,7 @@ function CopyFact({ Icon, label, value, bg }: (typeof facts)[number]) {
       return;
     }
     setCopied(true);
+    trackEvent('email_copy');
     const bubble = bubbleRef.current;
     if (bubble && !prefersReducedMotion()) {
       gsap

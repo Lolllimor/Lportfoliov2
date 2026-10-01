@@ -1,7 +1,10 @@
+'use client';
+
 import { Sparkles } from 'lucide-react';
 
 import InteractiveLink from './interactive-link';
 import { socialLabel, socialLinks } from '../constants/social-links';
+import { trackEvent } from '../lib/analytics';
 
 export default function SiteFooter() {
   return (
@@ -42,6 +45,7 @@ export default function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={socialLabel(link)}
+              onClick={() => trackEvent('social_click', { network: socialLabel(link), from: 'footer' })}
               className="transition-colors text-[var(--text-tertiary)] hover:text-[var(--accent-pink)]"
             >
               <span data-hop className="inline-flex">

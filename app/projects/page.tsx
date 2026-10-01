@@ -14,7 +14,7 @@ import SiteNav from '../components/site-nav';
 import WorldBackground from '../components/world-background';
 
 export const metadata: Metadata = {
-  title: 'Projects — Rodiat Morin',
+  title: 'Projects, Rodiat Morin',
   description:
     'The full collection of products, platforms and websites Rodiat Morin has designed and built.',
 };
@@ -53,7 +53,7 @@ export default function ProjectsPage() {
           </h1>
           <p className="text-base md:text-lg max-w-xl mb-14" style={{ color: 'var(--text-secondary)' }}>
             A closer look at the platforms, products and websites I&apos;ve
-            helped bring to life — from enterprise systems used across whole
+            helped bring to life, from enterprise systems used across whole
             organisations to playful, design-led sites.
           </p>
 

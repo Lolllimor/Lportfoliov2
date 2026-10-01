@@ -27,6 +27,7 @@ import ScalableText from './scalable-text';
 import StickyNote from './sticky-note';
 import VibePlayer from './vibe-player';
 import XpBar from './xp-bar';
+import { trackEvent } from '../lib/analytics';
 import { gsap, prefersReducedMotion, useGSAP } from '../lib/gsap';
 import WasdExplorer from './wasd-explorer';
 
@@ -159,8 +160,8 @@ export default function HeroWorld() {
             className="text-base md:text-lg leading-relaxed max-w-md mb-8"
             style={{ color: 'var(--text-secondary)' }}
           >
-            A solutions architect with 4+ years of turning complex business
-            requirements into full-stack systems — from Node.js and NestJS
+            A solutions architect with 3+ years of turning complex business
+            requirements into full-stack systems, from Node.js and NestJS
             services to React and Next.js interfaces people love to use.
           </motion.p>
 
@@ -180,6 +181,7 @@ export default function HeroWorld() {
                 download="Rodiat_Morin_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('resume_download')}
                 className="btn-soft inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-extrabold"
               >
                 Download CV
@@ -206,8 +208,7 @@ export default function HeroWorld() {
                 style={{ color: 'var(--text-secondary)' }}
               >
                 Architecting insurance products at{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>Etap Insure</strong>{' '}
-                — from API to interface ✨
+                <strong style={{ color: 'var(--text-primary)' }}>Etap Insure</strong>, from spec to production ✨
               </p>
               <div className="flex items-center gap-3 text-xs font-bold" style={{ color: 'var(--text-secondary)' }}>
                 <span>Lv. {experience.length}</span>

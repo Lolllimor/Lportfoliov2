@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Heart, Pause, Play, SkipBack, SkipForward } from 'lucide-react';
+import { trackEvent } from '../lib/analytics';
 import { LofiEngine, lofiTracks } from '../lib/lofi-engine';
 
 const BAR_COUNT = 4;
@@ -63,6 +64,7 @@ export default function VibePlayer() {
     } else {
       await engine().play(trackIndex);
       setPlaying(true);
+      trackEvent('music_play', { track: track.title });
     }
   };
 
