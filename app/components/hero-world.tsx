@@ -160,7 +160,7 @@ export default function HeroWorld() {
             className="text-base md:text-lg leading-relaxed max-w-md mb-8"
             style={{ color: 'var(--text-secondary)' }}
           >
-            A solutions architect with 4+ years of turning complex business
+            A solutions architect with 3+ years of turning complex business
             requirements into full-stack systems, from Node.js and NestJS
             services to React and Next.js interfaces people love to use.
           </motion.p>
@@ -208,7 +208,7 @@ export default function HeroWorld() {
                 style={{ color: 'var(--text-secondary)' }}
               >
                 Architecting insurance products at{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>Etap Insure</strong>, from API to interface ✨
+                <strong style={{ color: 'var(--text-primary)' }}>Etap Insure</strong>, from spec to production ✨
               </p>
               <div className="flex items-center gap-3 text-xs font-bold" style={{ color: 'var(--text-secondary)' }}>
                 <span>Lv. {experience.length}</span>

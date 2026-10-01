@@ -30,23 +30,22 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: 'Rodiat Morin, Solutions Architect (Node.js, NestJS, React, Next.js)',
+  title: 'Rodiat Morin, Solutions Architect (React, Next.js, TypeScript)',
   description:
-    'Solutions architect with 4+ years designing and shipping full-stack products: Node.js and NestJS services, React and Next.js interfaces. Focused on clear system design, secure workflows, and software that scales.',
+    'Solutions architect with 3+ years turning complex requirements into full-stack systems, from Node.js and NestJS services to React and Next.js interfaces.',
   keywords: [
-    'Software Developer',
+    'Solutions Architect',
+    'Frontend Developer',
     'Javascript',
     'React',
     'HTML 5',
     'CSS 3',
-    'Solutions Architect',
-    'Full-stack Developer',
-    'Node.js',
-    'NestJS',
     'Nextjs',
     'TypeScript',
+    'Redux',
+    'Tailwind CSS',
+    'Chakra UI',
     'Mantine',
-    'Material UI',
   ],
   authors: [{ name: 'Rodiat Morin ' }],
   icons: {

@@ -127,7 +127,7 @@ export default function Home() {
                 <div className="space-y-4 text-base md:text-lg leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
                   <p>
                     I&apos;m a <strong style={{ color: 'var(--text-primary)' }}>solutions architect</strong> with
-                    4+ years of experience turning messy business requirements into
+                    3+ years of experience turning messy business requirements into
                     systems that are simple to use and built to scale. I started on
                     the frontend, and I still sweat the details there, but my work
                     now spans the whole stack, from designing APIs and services in
