@@ -1,8 +1,8 @@
 import { track } from '@vercel/analytics';
 import { sendGAEvent } from '@next/third-parties/google';
 
-/** Google Analytics 4 measurement ID (G-XXXXXXX). GA stays off until it's set. */
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+/** Google Analytics 4 measurement ID. NEXT_PUBLIC_GA_ID overrides this. */
+export const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XK8V4W2KC5';
 
 export type AnalyticsEvent =
   | 'resume_download'
